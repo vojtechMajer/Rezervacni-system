@@ -9,7 +9,7 @@ abstract class Controller
     public function showView()
     {
         extract($this->data); // "rozbalení" pole data do jednotlivých proměnných, pojmenovaných podle klíčů v poli data
-        require "pohledy/{$this->view}.phtml";
+        require "views/{$this->view}.phtml";
     } 
 
     protected function redirect($url)
