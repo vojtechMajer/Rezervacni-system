@@ -64,5 +64,3 @@ class RouteController extends Controller
         return $rozdelenaCesta;
     }
 }
-
-?>
