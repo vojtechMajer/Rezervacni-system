@@ -7,7 +7,7 @@ CREATE TABLE `users` (
   `id_user` integer PRIMARY KEY,
   `id_user_type` integer,
   `username` varchar(255),
-  `role` varchar(255)
+  `password` varchar(255)
 );
 
 CREATE TABLE `order` (
@@ -39,7 +39,7 @@ CREATE TABLE `reservation_type` (
 
 CREATE TABLE `lane` (
   `id_lane` integer PRIMARY KEY,
-  `type` varchar(255)
+  `gates` boolean
 );
 
 ALTER TABLE `announcement` ADD FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`);
