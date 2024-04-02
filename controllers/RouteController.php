@@ -5,9 +5,10 @@ class RouteController extends Controller
   
     // podle URL ($parametry[0]) "předané z indexu" 
     // nalezne správný kontroler a předá mu řízení 
-    public function load($parametry)
+    public function load($parameters)
     {
-        $url = $parametry[0];
+        $url = $parameters[0];
+
         $castiCesty = $this->parseURL($url);
 
         if (empty($castiCesty[0]))

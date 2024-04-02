@@ -2,7 +2,7 @@
 
 class IndexController extends Controller 
 {
-    public function load($parametry)
+    public function load($parameters)
     {
         $this->view = "index";
     }

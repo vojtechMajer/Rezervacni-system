@@ -4,7 +4,7 @@ abstract class Controller
     protected $view = ""; // název souboru s pohledem (bez přípony .phtml)
     protected $data = []; // data kontroleru // např. pro sdílení mezi metodami
 
-    abstract public function load($parametry);
+    abstract public function load($parameters);
 
     public function showView()
     {
