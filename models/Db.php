@@ -3,7 +3,6 @@
 // zabezpečením parametrů (proměnných) v dotazech.
 class Db
 {
-
 	// Databázové spojení
 	private static $database;
 

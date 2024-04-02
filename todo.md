@@ -1,8 +1,8 @@
-Front end - Radovan Hrůza
+**Front end - Radovan Hrůza**
 TODO:
 Index
 
-Back end - David Lyko, Vojtěch Majer
+**Back end - David Lyko, Vojtěch Majer**
 User Model
  - Přihlášení
  - Odlhášení
