@@ -4,6 +4,6 @@ class LoginController extends Controller
 {
     public function load($parameters)
     {
-        $this->view = "index";
+        $this->view = "login";
     }
 }
