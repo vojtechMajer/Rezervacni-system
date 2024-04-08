@@ -4,6 +4,14 @@ abstract class Controller
     protected $view = ""; // název souboru s pohledem (bez přípony .phtml)
     protected $data = []; // data kontroleru // např. pro sdílení mezi metodami
 
+    protected $loggedUser;
+
+    public function __construct() {
+        $userManager = new UserManager();
+
+        $this->loggedUser = $userManager->getLoggedUser();
+    }
+
     abstract public function load($parameters);
 
     public function showView()
