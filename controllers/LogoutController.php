@@ -1,11 +1,11 @@
 <?php
-class LoginController extends Controller 
+class LogoutController extends Controller 
 {
     public function load($parameters)
     {
         $userManager = new UserManager();
         if($userManager->logout())
-            // add message
+            $this->addMessage("úspěšně odhlášen");
         $this->redirect("");
     }
 }

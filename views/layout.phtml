@@ -11,10 +11,24 @@
     <ul>
         <li><a href="index">Úvod</a></li>
         <li><a href="login">Login</a></li>
-
+        <li><a href="logout">lougout</a></li>
     </ul>
+
+
     <?php
         $this->controller->showView();
     ?>
+
+
+    <?php foreach ($messages as $message) { 
+        echo "zpravy";
+    ?>
+
+        <div class="zprava">
+            <?= $message["text"]?>
+        </div>
+
+    <?php } ?>
+
 </body>
 </html>

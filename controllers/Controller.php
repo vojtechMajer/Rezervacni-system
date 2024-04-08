@@ -25,4 +25,15 @@ abstract class Controller
         header("Location: /$url");
         exit;
     }
+
+    protected function addMessage($text)
+    {
+        $_SESSION["messages"][] = ["text" => $text];
+    }
+    protected function getMessages()
+    {
+        $messages = $_SESSION["messages"] ?? [];
+        unset($_SESSION["messages"]);
+        return $messages;
+    }
 }

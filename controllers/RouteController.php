@@ -37,6 +37,8 @@ class RouteController extends Controller
                 // přesměrujeme na chybový kontroler
                 $this->redirect("error");
             }
+
+            $this->data["messages"] = $this->getMessages();
         } 
     }
   

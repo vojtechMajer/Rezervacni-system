@@ -9,9 +9,11 @@ class LoginController extends Controller
         {
             if($userManager->login($_POST))
             {
+                $this->addMessage("uspěšně přihlášen");
                 $this->redirect("");
             }
-            else $this->redirect("error");
+            else
+                $this->addMessage("přihlášení bylo neuspěšné");
         }
         
         $this->view = "login";
