@@ -11,4 +11,4 @@ INSERT INTO `lane` (`id_lane`, `gates`) VALUES ('0', '1'), ('1', '0');
 INSERT INTO `reservation_type` (`id_reservation_type`, `name`) VALUES ('0', 'Sprava'), ('1', 'Rezervovano');
 
 -- Add reservations
-INSERT INTO `reservation` (`id_reservation`, `id_reservation_type`, `id_lane`, `start`, `end`, `date`) VALUES ('0', '0', '0', '16:00:00', '16:30:00', '2024-04-02'), ('1', '1', '1', '16:00:00', '16:00:00', '2024-04-02');
+INSERT INTO `reservation` (`id_reservation`, `id_reservation_type`, `id_lane`, `start`, `end`) VALUES ('0', '0', '0', '2024-04-02 16:00:00', '2024-04-02 16:30:00'), ('1', '1', '1', '2024-12-02 14:00:00', '2024-12-02 16:00:00',);
