@@ -3,18 +3,27 @@ TODO:
 Index
 
 **Back end - David Lyko, Vojtěch Majer**
-User Model
- - Přihlášení
- - vraceni uzivatele
- - Odlhášení
+Uživatel Model(User manager)
+ - Přihlášení ✓
+ - vraceni uzivatele ✓
+ - Odlhášení ✓
+ - registrace 
+ - *zmena hesla
 
-Reservation Model 
- - vytvoření rezervace controller
- - vraceni rezervaci 
- - Další ... 
- - (*)zrušení rezervace controller
+Rezervace Model(Reservation manager) 
+ - vytvoření rezervace ( kontroler rezervace -> formulář ve view, id aktivniho uzivatele)
+ - vraceni všech rezervaci (do kalendář rezervací)
+ - vraceni rezervaci uzivatele (pro přehled vlastních rezervací)
+ - 
+ - *zrušení rezervace controller
 
-Order Model
- - Vytvořit Objednávku controller
- - Přidat Rezervaci controller
+Objednavka Model 
+ - Vytvořit Objednavku
+ - Přidat Rezervaci do objednavky
+ - vypis ceny
 
+Announcment Manager
+ - pridat zpravu
+ - odebrat zpravu
+ - bla bla
+ 
