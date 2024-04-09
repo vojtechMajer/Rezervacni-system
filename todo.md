@@ -5,6 +5,7 @@ Index
 **Back end - David Lyko, Vojtěch Majer**
 User Model
  - Přihlášení
+ - vraceni uzivatele
  - Odlhášení
 
 Reservation Model 
