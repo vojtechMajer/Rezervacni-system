@@ -1,23 +1,23 @@
 CREATE TABLE `user_type` (
-  `id_user_type` integer PRIMARY KEY,
+  `id_user_type` integer PRIMARY KEY AUTO_INCREMENT, 
   `name` varchar(255) NOT NULL
 );
 
 CREATE TABLE `users` (
-  `id_user` integer PRIMARY KEY,
+  `id_user` integer PRIMARY KEY AUTO_INCREMENT,
   `id_user_type` integer NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL
 );
 
 CREATE TABLE `order` (
-  `id_order` integer PRIMARY KEY,
+  `id_order` integer PRIMARY KEY AUTO_INCREMENT,
   `id_reservation` integer NOT NULL,
   `id_user` integer NOT NULL
 );
 
 CREATE TABLE `announcement` (
-  `id_announcement` integer PRIMARY KEY,
+  `id_announcement` integer PRIMARY KEY AUTO_INCREMENT,
   `id_user` integer NOT NULL,
   `text` varchar(255)
 );
@@ -25,7 +25,7 @@ CREATE TABLE `announcement` (
 -- pozor na zmenu date na datime
 
 CREATE TABLE `reservation` (
-  `id_reservation` integer PRIMARY KEY,
+  `id_reservation` integer PRIMARY KEY AUTO_INCREMENT,
   `id_reservation_type` integer NOT NULL,
   `id_lane` integer NOT NULL,
   `start` datetime NOT NULL,
@@ -33,12 +33,12 @@ CREATE TABLE `reservation` (
 );
 
 CREATE TABLE `reservation_type` (
-  `id_reservation_type` integer PRIMARY KEY,
+  `id_reservation_type` integer PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(255) NOT NULL
 );
 
 CREATE TABLE `lane` (
-  `id_lane` integer PRIMARY KEY,
+  `id_lane` integer PRIMARY KEY AUTO_INCREMENT,
   `gates` boolean NOT NULL
 );
 
