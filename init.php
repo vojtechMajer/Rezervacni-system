@@ -12,4 +12,3 @@ function loadClass($className)
 spl_autoload_register("loadClass");
 
 Db::connect("localhost", "root", "", "testRezervace");
-// Db::pripoj("localhost", "root", "", "i3b_wea");

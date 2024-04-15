@@ -27,3 +27,7 @@ Announcment Manager
  - odebrat zpravu
  - bla bla
  
+Lane Manager
+ - list lanes
+ - get lane
+ - 
