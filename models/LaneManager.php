@@ -17,7 +17,8 @@ class LaneManager {
 
     public function getLaneById($id)
     {
-        return DB::queryAll("select * from lanes where id_lane == ? ", $id);
+        $lane = DB::queryOne("select * from lanes where id_lane == ? ", $id); 
+        return new Lane($lane["id_lane"], $lane["gates"]);
     }
 
 }
