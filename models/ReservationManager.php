@@ -1,5 +1,5 @@
 <?php
-class  ReservationManager
+class ReservationManager
 {
     public function getReservations()
     {
@@ -10,7 +10,7 @@ class  ReservationManager
 
     public function addReservation(Lane $lane, $reservationType, $startDate, $endDate)
     {
-        $sql = "insert into 'reservation' ($reservationType, $lane->id, $startDate, $endDate)";
+        $sql = "insert into 'reservation' ($reservationType, $lane->id, '$startDate', '$endDate')";
         Db::query($sql);
     }
 

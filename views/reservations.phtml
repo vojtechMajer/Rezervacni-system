@@ -1,0 +1,23 @@
+
+
+<h1>Reservations</h1>
+
+<ul>
+<?php foreach ($reservations as $reservation) { ?>
+
+    <li>
+        <?php
+            echo "id: ". $reservation["id_reservation"];
+            echo "<br>";
+            echo "typ rezervace: ". $reservation["id_reservation_type"];
+            echo "<br>";
+            echo "cislo drahy: ". $reservation["id_lane"];
+            echo "<br>";
+            echo "začátek rezervace: ". $reservation["start"];
+            echo "<br>";
+            echo "konec rezervace: ". $reservation["end"];
+        ?>
+
+    </li>
+<?php } ?>
+</ul>
