@@ -57,6 +57,12 @@ class Db
 		$stmt->execute($parameters);
 		return $stmt->rowCount();
 	}
+	
+	public static function execute($query, $parameters = array())
+	{
+		$stmt = self::$database->prepare($query);
+		return $stmt->execute($parameters);
+	}
 
 	// Vloží do tabulky nový řádek jako data z asociativního pole
 	public static function insert($table, $parameters = array())

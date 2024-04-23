@@ -30,6 +30,31 @@ class UserManager {
         else return false;
     }
 
+     // register user
+     public function register($userData)
+     {
+        
+         $existingUser = Db::queryOne("SELECT * FROM users WHERE username = ?", [$userData["username"]]);
+         if ($existingUser) {
+             return false;
+         }
+
+        if ($userData["password"] !== $userData["confirm_password"]) {
+            return false;
+        }
+
+         $hashedPassword = $this->getHash($userData["password"]);
+ 
+         $sql = "INSERT INTO users (username, id_user_type, password) VALUES (?, 2, ?)";
+         $success = Db::execute($sql, [$userData["username"], $hashedPassword]);
+ 
+         if ($success) {
+             return true; 
+         } else {
+             return false; 
+         }
+     }
+
     // sign out
     public function logout()
     {
