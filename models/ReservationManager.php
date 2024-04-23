@@ -1,8 +1,6 @@
 <?php
 class  ReservationManager
 {
-
-
     public function getReservations()
     {
         $reservations = array();
