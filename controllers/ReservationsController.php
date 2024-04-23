@@ -8,8 +8,8 @@ class ReservationsController extends Controller
         $laneManager = new LaneManager();
 
         $reservationManager->addReservation($laneManager->getLaneById(1), 1/*typ reservace*/,
-            date_format(new DateTime("now"),"y-m-d H:i:s"),
-            date_format(new DateTime("now"),"y-m-d H:i:s")
+            date_format(new DateTime("now"),"Y-m-d H:i:s"),
+            date_format(new DateTime("now"),"Y-m-d H:i:s")
         );
 
         $this->data["reservations"] = $reservationManager->getReservations();
