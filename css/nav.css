@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
+* {
+  font-family: Newsreader,serif;
+}
+
+/* Extended Nav */
+
+nav {
+  margin: 0px;
+  padding: 0px;
+  top: 0px;
+  left: 0px;
+  /*width: 100%;*/
+  z-index: 1;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  background-color: rgb(190, 184, 184)
+  /*background-image: url("/storage/RestaurantFoto.png");
+  background-size: cover;
+  background-repeat: no-repeat;*/
+}
+
+nav img {
+  width: 200px;
+  display: flex;
+  margin: 0px;
+  border: 0px;
+}
+
+nav h1 {
+  display: inline;
+  position: absolute;
+  margin: auto;
+  padding: 0px;
+  left: 250px;
+  bottom: 60px;
+
+  font-size: 50px;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0 10px 0 0;
+  width: auto;
+  overflow: hidden;
+  background: #333;
+}
+
+nav li {
+  float: right;
+  display: block;
+  width: 150px;
+}
+
+nav li a {
+  display: block;
+  padding: 8px;
+  color: whitesmoke;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* End Of Extended Nav */
+/* Nav */
+
+/* End of Nav */
+
+/*Main body*/
+body {
+    background-color: whitesmoke;    
+}
