@@ -7,7 +7,8 @@ Uživatel Model(User manager)
  - Přihlášení ✓
  - vraceni uzivatele ✓
  - Odlhášení ✓
- - registrace 
+ - registrace ✓
+ - registrace nového admina 
  - *zmena hesla
 
 Rezervace Model(Reservation manager) 
