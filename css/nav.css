@@ -5,7 +5,67 @@
 
 /* Extended Nav */
 
-nav {
+nav.exNavbar {
+  margin: 0px;
+  padding: 0px;
+  top: 0px;
+  left: 0px;
+  /*width: 100%;*/
+  z-index: 1;
+  /*position: -webkit-sticky; /* Safari */
+  /*position: sticky;*/
+  background-color: rgb(190, 184, 184)
+  /*background-image: url("/storage/RestaurantFoto.png");
+  background-size: cover;
+  background-repeat: no-repeat;*/
+}
+
+nav.exNavbar img {
+  width: 200px;
+  display: flex;
+  margin: 0px;
+  border: 0px;
+}
+
+nav.exNavbar h1 {
+  display: inline;
+  position: absolute;
+  margin: auto;
+  padding: 0px;
+  left: 250px;
+  bottom: 60px;
+
+  font-size: 50px;
+}
+
+nav.exNavbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0 10px 0 0;
+  width: auto;
+  overflow: hidden;
+  background: #333;
+}
+
+nav.exNavbar li {
+  float: right;
+  display: block;
+  width: 150px;
+}
+
+nav.exNavbar li a {
+  display: block;
+  padding: 8px;
+  color: whitesmoke;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* End Of Extended Nav */
+
+/* Contracted Nav */
+
+nav.conNavbar {
   margin: 0px;
   padding: 0px;
   top: 0px;
@@ -20,25 +80,28 @@ nav {
   background-repeat: no-repeat;*/
 }
 
-nav img {
-  width: 200px;
+nav.conNavbar img {
+  width: 35.2px;
   display: flex;
+  position: absolute;
+  left: 0px;
+  top: 0px;
   margin: 0px;
   border: 0px;
 }
 
-nav h1 {
+nav.conNavbar h1 {
   display: inline;
   position: absolute;
   margin: auto;
   padding: 0px;
-  left: 250px;
-  bottom: 60px;
+  left: 50px;
+  top: 2.5px;
 
-  font-size: 50px;
+  font-size: 30px;
 }
 
-nav ul {
+nav.conNavbar ul {
   list-style-type: none;
   margin: 0;
   padding: 0 10px 0 0;
@@ -47,13 +110,13 @@ nav ul {
   background: #333;
 }
 
-nav li {
+nav.conNavbar li {
   float: right;
   display: block;
   width: 150px;
 }
 
-nav li a {
+nav.conNavbar li a {
   display: block;
   padding: 8px;
   color: whitesmoke;
@@ -61,7 +124,7 @@ nav li a {
   text-decoration: none;
 }
 
-/* End Of Extended Nav */
+/* End Of Contracted Nav */
 /* Nav */
 
 /* End of Nav */
