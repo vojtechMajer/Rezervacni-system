@@ -6,7 +6,11 @@
     <title>Registrace</title>
 </head>
 <body>
-    <h1>Registrace</h1>
+    <?php if(isset($_SESSION["user"]) && $id_user_type == 1): ?>
+        <h1>Registrace nového admina</h1>
+    <?php else: ?>
+        <h1>Registrace</h1>
+    <?php endif; ?>
 
     <form method="post">
         <div>
