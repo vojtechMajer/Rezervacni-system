@@ -7,17 +7,37 @@
 
     <li>
         <?php
-            echo "id: ". $reservation["id_reservation"];
+            echo "id: ". $reservation->id;
             echo "<br>";
-            echo "typ rezervace: ( id -> ". $reservation["id_reservation_type"]. " )". $ReservationTypes[0];
+            echo "typ rezervace: ( id -> ". $reservation->type. " )";
             echo "<br>";
-            echo "cislo drahy: ". $reservation["id_lane"];
+            echo "cislo drahy: ". $reservation->lane->id ;
             echo "<br>";
-            echo "začátek rezervace: ". $reservation["start"];
+            echo "začátek rezervace: ". $reservation->startDate;
             echo "<br>";
-            echo "konec rezervace: ". $reservation["end"];
+            echo "konec rezervace: ". $reservation->endDate;
         ?>
 
     </li>
 <?php } ?>
+
+<h1>Overlaping reservations</h1>
+<?php foreach ($overlapingReservations as $reservation) { ?>
+
+<li>
+    <?php
+        echo "id: ". $reservation->id;
+        echo "<br>";
+        echo "typ rezervace: ( id -> ". $reservation->type. " )";
+        echo "<br>";
+        echo "cislo drahy: ". $reservation->lane->id ;
+        echo "<br>";
+        echo "začátek rezervace: ". $reservation->startDate;
+        echo "<br>";
+        echo "konec rezervace: ". $reservation->endDate;
+    ?>
+
+</li>
+<?php } ?>
+
 </ul>

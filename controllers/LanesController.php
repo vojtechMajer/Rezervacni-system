@@ -3,10 +3,8 @@
 class LanesController extends Controller
 {
     public function load($parameters)
-    {
-        $laneManager = new LaneManager();
-        
-        $lines = $laneManager->getLanes();
+    {   
+        $lines = LaneManager::getLanes();
         
         $this->data["lanes"] = $lines;
         

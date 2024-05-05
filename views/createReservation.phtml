@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrace</title>
+</head>
+<body>
+    <?php if(isset($_SESSION["user"])): ?>
+
+        <?= $isAdmin ?>
+
+        <form method="post">
+            
+        <label for="user_id" >id_uzivatele</label>
+        <input type="text" name="user_id" value="<?= $userId ?>" id="user_id" required>
+        <br>
+        
+        <label for="start_date">začátek rezervace</label>
+        <input type="datetime-local" name="start_date" id="start_date">
+        <br>
+
+        <label for="end_date">konec rezervace</label>
+        <input type="datetime-local" name="end_date" id="end_date">
+        <br>
+        
+        <label for="lane">draha</label>
+        <select name="lane" id="lane">
+            <?php 
+                foreach($lanes as $lane)
+                {                    
+            ?>
+                <option value=<?= $lane->id ?> > <?=$lane->id?> </option>
+            <?php 
+                }
+            ?>
+        </select>
+        <br>
+
+        <label for="reservation_type">Typ rezervace</label>
+        <select name="reservation_type" id="reservation_type">
+        
+        <?php if($userType == 1): ?>
+                <?php 
+                    foreach($reservationTypes as $reservationType)
+                    {                    
+                ?>
+                    <option value=<?= $reservationType->id ?> > <?=$reservationType->name?> </option>
+                <?php 
+                    }
+                ?>
+        <?php else: ?>
+            <option value="2">Rezervace</option>
+        <?php endif; ?>
+        </select>
+        <br>
+        
+        <input type="submit" value="vytvorit rezervaci">
+    
+    </form>
+    <?php else: ?>
+        <h1>Neprihlaseny uzivatel</h1>
+        <p>Zatím není možné rezervovat dráhy pro nepřihlášené uživatele</p>
+    <?php endif; ?>
+
+</body>
+</html>

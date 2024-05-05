@@ -1,6 +1,5 @@
--- Add user types
+-- Add user types pes
 INSERT INTO `user_type` (`name`) VALUES ('admin'), ('customer');
-
 -- Add users
 INSERT INTO `users` (`id_user_type`, `username`, `password`) VALUES ('1', 'Administrator1', '56b1db8133d9eb398aabd376f07bf8ab5fc584ea0b8bd6a1770200cb613ca005'), ('2', 'Franta', '56b1db8133d9eb398aabd376f07bf8ab5fc584ea0b8bd6a1770200cb613ca005');
 

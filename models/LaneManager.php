@@ -2,20 +2,20 @@
 
 class LaneManager {
 
-    public function getLanes()
+    public static function getLanes()
     {
-        $lanesData = DB::queryAll("select * from lane");
+        $query = DB::queryAll("select * from lane");
         $lanes = [];
         
-        foreach($lanesData as $laneData)
+        foreach($query as $row)
         {
-            $lanes[] = new Lane($laneData["id_lane"], $laneData["gates"]);
+            $lanes[] = new Lane($row["id_lane"], $row["gates"]);
         }
 
         return $lanes;
     }
 
-    public function getLaneById($id)
+    public static function getLaneById($id)
     {
         $lane = DB::queryOne("select * from lane where id_lane = ? ", [$id]); 
         return new Lane($lane["id_lane"], $lane["gates"]);
