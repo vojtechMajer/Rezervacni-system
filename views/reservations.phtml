@@ -1,10 +1,47 @@
-
-
 <h1>Reservations</h1>
 
-<ul>
-<?php foreach ($reservations as $reservation) { ?>
+<?php
 
+    foreach( $parametry as $parametr) 
+    {
+        echo $parametr;
+        echo "<br>";
+    }
+    
+    echo "{";
+    foreach( $reservationJSONS as $index=>$json)
+    {
+        if(empty($reservationJSONS[$index+1]))
+        {
+            echo $json;
+        }
+        else echo $json.",";
+    }
+    echo "}";
+
+?>
+
+<ul>
+    <?php foreach ($reservations as $reservation) { ?>
+        <li>
+            <?php
+                echo "id: ". $reservation->id;
+                echo "<br>";
+                echo "typ rezervace: ( id -> ". $reservation->type. " )";
+                echo "<br>";
+                echo "cislo drahy: ". $reservation->lane->id ;
+                echo "<br>";
+                echo "začátek rezervace: ". $reservation->startDate;
+                echo "<br>";
+                echo "konec rezervace: ". $reservation->endDate;
+            ?>
+        </li>
+    <?php } ?>
+</ul>
+
+<h1>Overlaping reservations</h1>
+<ul>
+    <?php foreach ($overlapingReservations as $reservation) { ?>
     <li>
         <?php
             echo "id: ". $reservation->id;
@@ -19,25 +56,6 @@
         ?>
 
     </li>
-<?php } ?>
-
-<h1>Overlaping reservations</h1>
-<?php foreach ($overlapingReservations as $reservation) { ?>
-
-<li>
-    <?php
-        echo "id: ". $reservation->id;
-        echo "<br>";
-        echo "typ rezervace: ( id -> ". $reservation->type. " )";
-        echo "<br>";
-        echo "cislo drahy: ". $reservation->lane->id ;
-        echo "<br>";
-        echo "začátek rezervace: ". $reservation->startDate;
-        echo "<br>";
-        echo "konec rezervace: ". $reservation->endDate;
-    ?>
-
-</li>
-<?php } ?>
+    <?php } ?>
 
 </ul>

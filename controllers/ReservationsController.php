@@ -13,11 +13,23 @@ class ReservationsController extends Controller
         
         // DEBUG
         $lane = LaneManager::getLaneById(1);
-        $overlapingReservations = ReservationManager::getOverlapingReservations('2024-04-02 15:00:00', '2024-04-02 15:59:00', $lane);
+        $overlapingReservations = ReservationManager::getOverlapingReservations('2024-04-02 15:00:00', '2024-04-02 17:59:00', $lane);
 
-        $this->data["overlapingReservations"] = $overlapingReservations;
-        $this->data["reservations"] = ReservationManager::getReservations();
+        $reservations = ReservationManager::getReservations();
         
+        $reservationJSONS = array();
+        
+        foreach ($reservations as $reservation)
+        {
+            $reservationJSONS[] = json_encode($reservation);
+        }
+            
+        $this->data["overlapingReservations"] = $overlapingReservations;
+        $this->data["reservations"] = $reservations;
+        $this->data["parametry"] = $parameters;
+
+        $this->data["reservationJSONS"] = $reservationJSONS;
+
         $this->view = "reservations";
     }
 }

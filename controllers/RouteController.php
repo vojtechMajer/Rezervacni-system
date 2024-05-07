@@ -25,7 +25,6 @@ class RouteController extends Controller
 
             if (file_exists("controllers/$nazevKontroleru.php"))
             {
-                
                 $this->controller = new $nazevKontroleru;
                 $this->controller->load($castiCesty);
                 
