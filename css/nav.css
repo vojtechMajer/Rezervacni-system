@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
+* {
+  font-family: Newsreader,serif;
+}
+
+/* Extended Nav */
+
+nav.exNavbar {
+  margin: 0px;
+  padding: 0px;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+  background-color: rgb(190, 184, 184)
+}
+
+nav.exNavbar img {
+  width: 200px;
+  display: flex;
+  margin: 0px;
+  border: 0px;
+}
+
+nav.exNavbar h1 {
+  display: inline;
+  position: absolute;
+  margin: auto;
+  padding: 0px;
+  left: 250px;
+  top: 120px;
+
+  font-size: 50px;
+}
+
+nav.exNavbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0 10px 0 0;
+  width: auto;
+  overflow: hidden;
+  background: #333;
+}
+
+nav.exNavbar li {
+  float: right;
+  display: block;
+  width: 150px;
+}
+
+nav.exNavbar li a {
+  display: block;
+  padding: 8px;
+  color: whitesmoke;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* End Of Extended Nav */
+/*-------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* Contracted Nav */
+
+nav.conNavbar {
+  margin: 0px;
+  padding: 0px;
+  top: 0px;
+  left: 0px;
+  height: 40px;
+  z-index: 1;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  background-color: rgb(153, 148, 148)
+}
+
+nav.conNavbar img {
+  width: 40px;
+  display: flex;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  margin: 0px;
+  border: 0px;
+}
+
+nav.conNavbar h1 {
+  display: inline;
+  position: absolute;
+  margin: auto;
+  padding: 0px;
+  left: 50px;
+  top: 2.5px;
+
+  font-size: 30px;
+}
+
+nav.conNavbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0 10px 0 0;
+  width: fit-content;
+  height: inherit;
+  right: 0px;
+  position: absolute;
+  overflow: hidden;
+  background: #333;
+}
+
+nav.conNavbar li {
+  float: right;
+  display: block;
+  width: 150px;
+}
+
+nav.conNavbar li a {
+  display: block;
+  padding: 10px;
+  color: whitesmoke;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* End Of Contracted Nav */
+/* Nav */
+
+/* End of Nav */
+/*-------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*Main body*/
+
+body {
+    background-color: whitesmoke;    
+}
