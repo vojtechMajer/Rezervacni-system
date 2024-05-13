@@ -8,16 +8,7 @@
         echo "<br>";
     }
     
-    echo "{";
-    foreach( $reservationJSONS as $index=>$json)
-    {
-        if(empty($reservationJSONS[$index+1]))
-        {
-            echo $json;
-        }
-        else echo $json.",";
-    }
-    echo "}";
+    echo $reservationJSONS;
 
 ?>
 

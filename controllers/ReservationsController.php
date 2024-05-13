@@ -4,31 +4,42 @@ class ReservationsController extends Controller
 {
     public function load($parameters)
     {
-        /*
-        $reservationManager->addReservation( $laneManager->getLaneById(1), 1,
-            date_format(new DateTime("now"),"Y-m-d H:i:s"),
-            date_format(new DateTime("now"),"Y-m-d H:i:s")
-        );
-        */
+        // TEST REZERVACE
+
+        // $timeS = mktime(17, 30, 0, 5, 13, 2024);
+        // $timeE = mktime(18, 00, 0, 5, 13, 2024);
+
+        // ReservationManager::addReservation (
+        //     LaneManager::getLaneById(1),
+        //     ReservationType::getReservationTypesById(1),
+        //     date("Y-m-d H:i:s", $timeS),
+        //     date("Y-m-d H:i:s", $timeE)
+        // );
+        
         
         // DEBUG
         $lane = LaneManager::getLaneById(1);
         $overlapingReservations = ReservationManager::getOverlapingReservations('2024-04-02 15:00:00', '2024-04-02 17:59:00', $lane);
 
-        $reservations = ReservationManager::getReservations();
+        $reservations = ReservationManager::getAllReservations();
+
         
-        $reservationJSONS = array();
+        // TEST RESERVATION IN DATABASE 2024-04-02 16:00:00, ! 2024-05-13 17:30:00 !
+        $reservations = ReservationManager::getReservationsAfterDate('2024-05-20');
         
-        foreach ($reservations as $reservation)
-        {
-            $reservationJSONS[] = json_encode($reservation);
-        }
-            
+        // Actual JSON
+        $this->data["reservationJSONS"] = json_encode($reservations);
+        
+
+
+        // test 
         $this->data["overlapingReservations"] = $overlapingReservations;
+        // test 
         $this->data["reservations"] = $reservations;
+        // test 
         $this->data["parametry"] = $parameters;
 
-        $this->data["reservationJSONS"] = $reservationJSONS;
+
 
         $this->view = "reservations";
     }

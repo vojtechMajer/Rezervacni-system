@@ -21,13 +21,14 @@ class RouteController extends Controller
             // v URL je neprázdná cesta (tedy určen kontroler)      
             // ["uzivatel", "10", "editace"]    // $castiCesty
             $castNazvuKontroleru = array_shift($castiCesty); // vrátí první prvek a ostatní prvky posune na začátek
-            $nazevKontroleru = $this->kebabToCamelCase($castNazvuKontroleru). "Controller";
+            $nazevKontroleru = $this->kebabToCamelCase($castNazvuKontroleru)."Controller";
 
             if (file_exists("controllers/$nazevKontroleru.php"))
             {
                 $this->controller = new $nazevKontroleru;
                 $this->controller->load($castiCesty);
                 
+
                 $this->view = "layout";
             }
             else
