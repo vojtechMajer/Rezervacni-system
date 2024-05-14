@@ -1,14 +1,14 @@
 <h1>Reservations</h1>
 
-<?php
-
-    foreach( $parametry as $parametr) 
-    {
-        echo $parametr;
-        echo "<br>";
-    }
+<?php    
+    var_dump($testDate);
+    echo "<br>";
     
-    echo $reservationJSONS;
+    var_dump($parametry);
+    echo "<br>";
+    
+    echo $reservationsJSON;
+    echo "<br>";
 
 ?>
 
@@ -28,25 +28,4 @@
             ?>
         </li>
     <?php } ?>
-</ul>
-
-<h1>Overlaping reservations</h1>
-<ul>
-    <?php foreach ($overlapingReservations as $reservation) { ?>
-    <li>
-        <?php
-            echo "id: ". $reservation->id;
-            echo "<br>";
-            echo "typ rezervace: ( id -> ". $reservation->type. " )";
-            echo "<br>";
-            echo "cislo drahy: ". $reservation->lane->id ;
-            echo "<br>";
-            echo "začátek rezervace: ". $reservation->startDate;
-            echo "<br>";
-            echo "konec rezervace: ". $reservation->endDate;
-        ?>
-
-    </li>
-    <?php } ?>
-
 </ul>
