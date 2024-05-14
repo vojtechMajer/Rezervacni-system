@@ -1,7 +1,7 @@
 <?php
 class RouteController extends Controller 
 {
-    protected $controller; // objekt kontroleru
+    public $controller; // objekt kontroleru
   
     // podle URL ($parametry[0]) "předané z indexu" 
     // nalezne správný kontroler a předá mu řízení 
@@ -27,7 +27,6 @@ class RouteController extends Controller
             {
                 $this->controller = new $nazevKontroleru;
                 $this->controller->load($castiCesty);
-                
 
                 $this->view = "layout";
             }

@@ -10,6 +10,7 @@ class ReservationsController extends Controller
         // $timeS = mktime(17, 30, 0, 5, 13, 2024);
         // $timeE = mktime(18, 00, 0, 5, 13, 2024);
 
+        // Add reservation 
         // ReservationManager::addReservation (
         //     LaneManager::getLaneById(1),
         //     ReservationType::getReservationTypesById(1),
