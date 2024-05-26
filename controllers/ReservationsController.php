@@ -22,6 +22,7 @@ class ReservationsController extends Controller
         //     date("Y-m-d H:i:s", mktime(18, 00, 0, 5, 14, 2024))
         // );
 
+        // http://localhost/reservations/in-week?week=2024-05-26
         switch ($parameters[0]) {
             case 'in-week':
                 if (isset($_GET["week"])) {

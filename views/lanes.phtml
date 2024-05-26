@@ -1,14 +1,7 @@
-<h1>Lanes</h1>
+<pre>
 
-<ul>
-<?php foreach ($lanes as $lane) { ?>
+<?php
+echo $lanesJSON;
+?>
 
-    <li>
-        <?php
-            echo "Dráha ".$lane->id." Barriery ";
-            echo ($lane->hasBlocks)?"Ano":"ne";
-         ?>
-
-    </li>
-<?php } ?>
-</ul>
+</pre>
