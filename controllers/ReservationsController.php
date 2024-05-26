@@ -2,7 +2,11 @@
 
 class ReservationsController extends Controller
 {
-    
+    function __construct()
+    {
+        $this->dontShowLayout = true;
+    }
+
     public function load($parameters)
     {
         // TEST REZERVACE
@@ -17,31 +21,33 @@ class ReservationsController extends Controller
         //     date("Y-m-d H:i:s", mktime(19, 30, 0, 5, 14, 2024)),
         //     date("Y-m-d H:i:s", mktime(18, 00, 0, 5, 14, 2024))
         // );
-        
-        foreach ($parameters as $parameter)
-        {
-            if ($parameter == "reservationsInWeek")
-            {
-                $reservations = (isset($_GET['date']))? ReservationManager::getReservationsinWeek( date('Y-m-d', strtotime($_GET['date']))) : ""; 
-                $this->data["reservations"] = $reservations;
+
+        switch ($parameters[0]) {
+            case 'in-week':
+                if (isset($_GET["week"])) {
+                    $reservations = ReservationManager::getReservationsInWeek(date('Y-m-d', strtotime($_GET['week'])));
+                    // $this->data["reservations"] = $reservations;
+                    $this->data["reservationsJSON"] = json_encode($reservations);
+                } else {
+                    $this->data["reservationsJSON"] = "";
+                }
+
+                break;
+
+            case 'all':
+                $reservations = ReservationManager::getAllReservations();
+                // $this->data["reservations"] = $reservations;
                 $this->data["reservationsJSON"] = json_encode($reservations);
-            }
+                break;
+
+            default:
+                $this->data["reservationsJSON"] = "";
+                break;
         }
-        
-        // DEBUG
-        // $lane = LaneManager::getLaneById(1);
-        // $overlapingReservations = ReservationManager::getOverlapingReservations('2024-04-02 15:00:00', '2024-04-02 17:59:00', $lane);
 
-        // $reservations = ReservationManager::getAllReservations();
-
-        
-        // TEST RESERVATION IN DATABASE 2024-04-02 16:00:00, ! 2024-05-13 17:30:00 !
-        // $reservations = ReservationManager::getReservationsAfterDate('2024-05-20');
-                
-
-        // test 
-        $this->data["parametry"] = $parameters;
-        $this->data["testDate"] = date('Y-m-d', strtotime($_GET['date'])) ;
+        // TEST
+        // $this->data["parametry"] = $parameters;
+        // $this->data["testDate"] = date('Y-m-d', strtotime($_GET['week']));
         $this->view = "reservations";
     }
 }
@@ -50,3 +56,8 @@ class ReservationsController extends Controller
 // FROM reservation 
 // 			-- Start rezervace												  	end rezervace
 // WHERE start > STR_TO_DATE('2023-04-02 16:00:00', '%Y-%m-%d %H:%i:%s') AND start < STR_TO_DATE('2023-04-02 16:30:00', '%Y-%m-%d %H:%i:%s') ;
+
+
+// TEST
+// $lane = LaneManager::getLaneById(1);
+// $overlapingReservations = ReservationManager::getOverlapingReservations('2024-04-02 15:00:00', '2024-04-02 17:59:00', $lane);

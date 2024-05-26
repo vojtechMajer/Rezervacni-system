@@ -3,10 +3,12 @@ abstract class Controller
 {
     protected $view = ""; // název souboru s pohledem (bez přípony .phtml)
     protected $data = []; // data kontroleru // např. pro sdílení mezi metodami
-
     protected $loggedUser;
 
-    public function __construct() {
+    public $dontShowLayout = false;
+
+    public function __construct()
+    {
         $userManager = new UserManager();
 
         $this->loggedUser = $userManager->getLoggedUser();
@@ -18,7 +20,7 @@ abstract class Controller
     {
         extract($this->data); // "rozbalení" pole data do jednotlivých proměnných, pojmenovaných podle klíčů v poli data
         require "views/{$this->view}.phtml";
-    } 
+    }
 
     protected function redirect($url)
     {

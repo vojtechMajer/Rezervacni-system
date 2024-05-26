@@ -1,31 +1,7 @@
-<h1>Reservations</h1>
+<pre>
 
-<?php    
-    var_dump($testDate);
-    echo "<br>";
-    
-    var_dump($parametry);
-    echo "<br>";
-    
-    echo $reservationsJSON;
-    echo "<br>";
-
+<?php
+echo $reservationsJSON;
 ?>
 
-<ul>
-    <?php foreach ($reservations as $reservation) { ?>
-        <li>
-            <?php
-                echo "id: ". $reservation->id;
-                echo "<br>";
-                echo "typ rezervace: ( id -> ". $reservation->type. " )";
-                echo "<br>";
-                echo "cislo drahy: ". $reservation->lane->id ;
-                echo "<br>";
-                echo "začátek rezervace: ". $reservation->startDate;
-                echo "<br>";
-                echo "konec rezervace: ". $reservation->endDate;
-            ?>
-        </li>
-    <?php } ?>
-</ul>
+</pre>

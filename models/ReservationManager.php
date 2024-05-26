@@ -4,12 +4,11 @@ class ReservationManager
     private static function queryToReservations($query)
     {
         $reservations = array();
-        foreach ($query as $reservationQuery)
-        {
+        foreach ($query as $reservationQuery) {
             $lane = LaneManager::getLaneById($reservationQuery["id_lane"]);
 
-            $reservations[] = 
-            new Reservation($reservationQuery["id_reservation"], $reservationQuery["id_reservation_type"], $lane,  $reservationQuery["start"], $reservationQuery["end"] );
+            $reservations[] =
+                new Reservation($reservationQuery["id_reservation"], $reservationQuery["id_reservation_type"], $lane, $reservationQuery["start"], $reservationQuery["end"]);
         }
         return $reservations;
     }
@@ -19,7 +18,7 @@ class ReservationManager
         $reservationsQuery = Db::queryAll("select * from reservation");
 
         $reservations = ReservationManager::queryToReservations($reservationsQuery);
-        
+
         return $reservations;
     }
 
@@ -30,7 +29,7 @@ class ReservationManager
     {
         $reservationsQuery = Db::queryAll("select * from reservation where YEARWEEK(start, 1) = YEARWEEK( STR_TO_DATE('$date', '%Y-%m-%d'), 1)");
         $reservations = ReservationManager::queryToReservations($reservationsQuery);
-        
+
         return $reservations;
     }
 
@@ -38,24 +37,27 @@ class ReservationManager
     /**
      * date format is yyy-mm-dd
      */
-    public static function getReservationsinWeek($date)
+    public static function getReservationsInWeek($date)
     {
-        $reservationsQuery = Db::queryAll("select * from reservation where start > STR_TO_DATE('$date', '%Y-%m-%d')");
+        $reservationsQuery = Db::queryAll(" SELECT *
+            FROM   reservation
+            WHERE  YEARWEEK(start, 1) = YEARWEEK(?, 1)",
+            [$date]
+        );
 
         $reservations = array();
-        foreach ($reservationsQuery as $reservationQuery)
-        {
+        foreach ($reservationsQuery as $reservationQuery) {
             $lane = LaneManager::getLaneById($reservationQuery["id_lane"]);
 
-            $reservations[] = 
-            new Reservation($reservationQuery["id_reservation"], $reservationQuery["id_reservation_type"], $lane,  $reservationQuery["start"], $reservationQuery["end"] );
+            $reservations[] =
+                new Reservation($reservationQuery["id_reservation"], $reservationQuery["id_reservation_type"], $lane, $reservationQuery["start"], $reservationQuery["end"]);
         }
-        
+
         return $reservations;
     }
 
 
-    public static function addReservation(Lane $lane,ReservationType $reservationType, $startDate, $endDate)
+    public static function addReservation(Lane $lane, ReservationType $reservationType, $startDate, $endDate)
     {
         $sql = "insert into reservation (id_reservation_type, id_lane, start, end) VALUES (?, ?, ?, ?)";
 
@@ -68,15 +70,14 @@ class ReservationManager
         
         where ( start <= STR_TO_DATE(?, '%Y-%m-%d %H:%i:%s') AND end >= STR_TO_DATE(?, '%Y-%m-%d %H:%i:%s')) 
         AND id_lane = ? ";
-        
-        $query = Db::queryAll($sql,[$endDate, $startDate, $lane->id]);
-        
+
+        $query = Db::queryAll($sql, [$endDate, $startDate, $lane->id]);
+
         $overlapReservations = array();
 
-        foreach ($query as $row)
-        {
+        foreach ($query as $row) {
             $lane = LaneManager::getLaneById($row["id_lane"]);
-            $overlapReservations[] = new Reservation($row['id_reservation'], $row['id_reservation_type'], $lane, $row['start'], $row['end'] ); 
+            $overlapReservations[] = new Reservation($row['id_reservation'], $row['id_reservation_type'], $lane, $row['start'], $row['end']);
         }
 
         return $overlapReservations;
