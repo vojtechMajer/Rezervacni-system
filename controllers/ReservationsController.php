@@ -30,7 +30,7 @@ class ReservationsController extends Controller
                     // $this->data["reservations"] = $reservations;
                     $this->data["reservationsJSON"] = json_encode($reservations);
                 } else {
-                    $this->data["reservationsJSON"] = "";
+                    $this->data["reservationsJSON"] = "[]";
                 }
 
                 break;
@@ -42,7 +42,7 @@ class ReservationsController extends Controller
                 break;
 
             default:
-                $this->data["reservationsJSON"] = "";
+                $this->data["reservationsJSON"] = "[]";
                 break;
         }
 
