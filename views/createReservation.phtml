@@ -74,7 +74,9 @@
                 //   let date = new Date(reservation.startDate.substring(0, 4), reservation.startDate.substring(5, 7) - 1, reservation.startDate.substring(8, 10));
             })
 
-        })
+        }).fail(function (textStatus, errorThrown) {
+            console.log("Error fetching data: " + textStatus + errorThrown);
+        });
 
 
     });
