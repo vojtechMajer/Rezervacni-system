@@ -10,5 +10,4 @@ function loadClass($className)
 }
 
 spl_autoload_register("loadClass");
-
 Db::connect("localhost", "root", "", "bowling");
