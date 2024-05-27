@@ -1,65 +1,103 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrace</title>
-</head>
-<body>
-    <?php if(isset($_SESSION["user"])): ?>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-        <form method="post">
-            
-        <label for="user_id" >id_uzivatele</label>
-        <input type="text" name="user_id" value="<?= $userId ?>" id="user_id" required>
-        <br>
-        
-        <label for="start_date">začátek rezervace</label>
-        <input type="datetime-local" name="start_date" id="start_date">
-        <br>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-        <label for="end_date">konec rezervace</label>
-        <input type="datetime-local" name="end_date" id="end_date">
-        <br>
-        
-        <label for="lane">draha</label>
-        <select name="lane" id="lane">
-            <?php 
-                foreach($lanes as $lane)
-                {                    
-            ?>
-                <option value=<?= $lane->id ?> > <?=$lane->id?> </option>
-            <?php 
+<table>
+    <tr>
+        <th>Dráhy/čas</th>
+        <th>6:00</th>
+        <th>6:30</th>
+    </tr>
+
+    <tr>
+        <td>Draha1</td>
+        <td>
+            <button>VOLNO</button>
+        </td>
+        <td>VOLNO</td>
+    </tr>
+
+    <tr>
+        <td>Draha2</td>
+        <td>VOLNO</td>
+        <td>VOLNO</td>
+    </tr>
+</table>
+
+<table id="reservation-table">
+</table>
+
+<script>
+    $(() => {
+        let drahyUrl = "http://localhost/lanes";
+
+        let reservationTable = $("table#reservation-table");
+        if (reservationTable.length === 0) {
+            console.log("Table not found!");
+            return;
+        }
+
+        let tableHeader = $("<tr>").appendTo(reservationTable);
+
+        // start     ..       end 
+        // 8:00 8:30 .. 17:30 18:00
+        let start = 8;
+        let end = 18;
+        let countOfTimeIntervals = end - start;
+
+        tableHeader.append("<th> DRAHY/ČASY");
+
+        // 2 kvůli půlhodinovým intervalům
+        for (let i = 0; i <= countOfTimeIntervals; i++) {
+            tableHeader.append("<th> " + String((start + i)) + ":00");
+            // nebude dávat 18:30
+            if (i != countOfTimeIntervals)
+                tableHeader.append("<th> " + String((start + i)) + ":30");
+        }
+
+        $.getJSON(drahyUrl, function (result) {
+            $.each(result, function (i, lane) {
+                // lane.id(int) & lane.hasBlocks(bool)
+                let laneContent = $("<tr>").appendTo(reservationTable);
+                laneContent.append("<th> " + lane.id);
+
+                for (let i = 0; i <= countOfTimeIntervals; i++) {
+                    //laneContent.append('<th id="' + String(i + start) + ":" + ((i % 2 == 0) ? "00" : "30") + "," + String(lane.id) + '">VOLNO</th>');
+                    laneContent.append('<th id="' + String(i + start) + "00" + lane.id + '">VOLNO</th>');
+                    // nebude dávat 18:30
+                    if (i != countOfTimeIntervals)
+                        laneContent.append('<th id="' + String(i + start) + "30" + lane.id + '">VOLNO</th>');
+
                 }
-            ?>
-        </select>
-        <br>
+            });
+        }).fail(function (textStatus, errorThrown) {
+            console.log("Error fetching data: " + textStatus + errorThrown);
+        });
 
-        <label for="reservation_type">Typ rezervace</label>
-        <select name="reservation_type" id="reservation_type">
-        
-        <?php if($userType == 1): ?>
-                <?php 
-                    foreach($reservationTypes as $reservationType)
-                    {                    
-                ?>
-                    <option value=<?= $reservationType->id ?> > <?=$reservationType->name?> </option>
-                <?php 
-                    }
-                ?>
-        <?php else: ?>
-            <option value="2">Rezervace</option>
-        <?php endif; ?>
-        </select>
-        <br>
-        
-        <input type="submit" value="vytvorit rezervaci">
-    
-    </form>
-    <?php else: ?>
-        <h1>Neprihlaseny uzivatel</h1>
-        <p>Zatím není možné rezervovat dráhy pro nepřihlášené uživatele</p>
-    <?php endif; ?>
+        var d = new Date();
+        var today = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
 
-</body>
-</html>
+        $.getJSON("http://localhost/reservations/in-week?week=" + today, function (reservations) {
+            $.each(reservations, function (i, reservation) {
+                console.log(reservation);
+
+                // start time
+                let hours = reservation.endDate.substring(11, 13);
+                let minutes = reservation.endDate.substring(14, 16);
+
+                let id = hours + "" + minutes + "" + reservation.lane.id;
+                console.log("id: " + id);
+
+                let kys = $("table#reservation-table tr th#13001");
+                kys.text("REZERV");
+
+                // console.log(date);
+                //   let date = new Date(reservation.startDate.substring(0, 4), reservation.startDate.substring(5, 7) - 1, reservation.startDate.substring(8, 10));
+            })
+
+        })
+
+
+    });
+</script>
