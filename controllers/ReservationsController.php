@@ -34,6 +34,15 @@ class ReservationsController extends Controller
                 }
 
                 break;
+            case 'by-day':
+                if (isset($_GET["day"])) {
+                    $reservations = ReservationManager::getReservationsOnDate(date('Y-m-d', strtotime($_GET['day'])));
+                    // $this->data["reservations"] = $reservations;
+                    $this->data["reservationsJSON"] = json_encode($reservations);
+                } else {
+                    $this->data["reservationsJSON"] = "[]";
+                }
+                break;
 
             case 'all':
                 $reservations = ReservationManager::getAllReservations();

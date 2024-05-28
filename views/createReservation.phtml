@@ -56,19 +56,50 @@
         var d = new Date();
         var today = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
 
-        $.getJSON("http://localhost/reservations/in-week?week=" + today, function (reservations) {
+        $.getJSON("http://localhost/reservations/by-day?day=" + today, function (reservations) {
             $.each(reservations, function (i, reservation) {
                 console.log(reservation);
 
                 // start time
-                let hours = reservation.endDate.substring(11, 13);
-                let minutes = reservation.endDate.substring(14, 16);
+                let Shours = Number(reservation.startDate.substring(11, 13));
+                let Sminutes = reservation.startDate.substring(14, 16);
 
-                let id = hours + "" + minutes + "" + reservation.lane.id;
-                console.log("id: " + id);
+                let Ehours = Number(reservation.endDate.substring(11, 13));
+                let Eminutes = reservation.endDate.substring(14, 16);
 
-                let kys = $("table#reservation-table tr th#13001");
-                kys.text("REZERV");
+                let reservedTimes = [];
+
+                reservedTimes.push($("table#reservation-table tr th#" + Shours + "" + Sminutes + "" + reservation.lane.id));
+                reservedTimes.push($("table#reservation-table tr th#" + Ehours + "" + Eminutes + "" + reservation.lane.id));
+
+                console.log(Shours + "" + Sminutes + "" + reservation.lane.id);
+                console.log(Ehours + "" + Eminutes + "" + reservation.lane.id);
+
+                if (Sminutes == "00") {
+                    // console.log(Shours + "30" + reservation.lane.id)
+                    // console.log(Shours + 1 + "00" + reservation.lane.id)
+                    reservedTimes.push($("table#reservation-table tr th#" + Shours + "30" + reservation.lane.id));
+                    reservedTimes.push($("table#reservation-table tr th#" + (Shours + 1) + "00" + reservation.lane.id));
+
+                }
+                for (let i = 1; i <= Ehours - Shours; i++) {
+                    reservedTimes.push($("table#reservation-table tr th#" + (Shours + i) + "00" + reservation.lane.id));
+                    if (i != Ehours - Shours)
+                        reservedTimes.push($("table#reservation-table tr th#" + (Shours + i) + "30" + reservation.lane.id));
+
+                    $("table#reservation-table tr th#" + (Shours + i) + "30" + reservation.lane.id);
+                    // console.log(Shours + i + "30" + reservation.lane.id);
+                    // pes.text("KYS");
+                }
+
+                $.each(reservedTimes, function (i, time) {
+                    time.text("KYS");
+                    time.css('color', 'red');
+                })
+
+
+                // let kys = $("table#reservation-table tr th#" + id);
+                // kys.text("REZERV");
 
                 // console.log(date);
                 //   let date = new Date(reservation.startDate.substring(0, 4), reservation.startDate.substring(5, 7) - 1, reservation.startDate.substring(8, 10));

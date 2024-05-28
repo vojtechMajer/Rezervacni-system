@@ -56,6 +56,26 @@ class ReservationManager
         return $reservations;
     }
 
+    public static function getReservationsOnDate($date)
+    {
+        $reservationsQuery = Db::queryAll(" SELECT *
+            FROM   reservation
+            WHERE  Date(start) = STR_TO_DATE(?, '%Y-%m-%d')",
+            [$date]
+        );
+
+        $reservations = array();
+        foreach ($reservationsQuery as $reservationQuery) {
+            $lane = LaneManager::getLaneById($reservationQuery["id_lane"]);
+
+            $reservations[] =
+                new Reservation($reservationQuery["id_reservation"], $reservationQuery["id_reservation_type"], $lane, $reservationQuery["start"], $reservationQuery["end"]);
+        }
+
+        return $reservations;
+    }
+
+
 
     public static function addReservation(Lane $lane, ReservationType $reservationType, $startDate, $endDate)
     {
