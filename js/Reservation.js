@@ -1,7 +1,10 @@
 $(() => {
     let drahyUrl = "http://localhost/lanes";
-
     let reservationTable = $("table#reservation-table");
+
+    let casy = new Map();
+
+
     if (reservationTable.length === 0) {
         console.log("Table not found!");
         return;
@@ -36,15 +39,15 @@ $(() => {
             laneContent.append("<td> " + lane.id);
 
             for (let i = 0; i <= countOfTimeIntervals; i++) {
-
-                $("<td>").appendTo(laneContent).attr("id", String(i + start) + "00" + lane.id).append("<button>HUH").on("click", function () {
-                    alert("kys");
+                let idH = String(i + start) + "00" + lane.id;
+                let idM = String(i + start) + "30" + lane.id;
+                $("<td>").appendTo(laneContent).attr("id", idH).append("<button>HUH").on("click", function () {
+                    addToReservations(casy, idH, lane.id);
                 });
 
-                // nebude dávat 18:30
                 if (i != countOfTimeIntervals)
-                    $("<td>").appendTo(laneContent).attr("id", String(i + start) + "30" + lane.id).append("<button>HUH").on("click", function () {
-                        alert("kys");
+                    $("<td>").appendTo(laneContent).attr("id", idM).append("<button>HUH").on("click", function () {
+                        addToReservations(casy, idM, lane.id);
                     });
             }
 
@@ -90,8 +93,8 @@ $(() => {
             }
 
             $.each(reservedTimes, function (i, time) {
-                time.text("KYS");
-                time.css('color', 'red');
+                time.children().text("KYS");
+                time.children().css('color', 'red');
             })
 
             // console.log(date);
@@ -104,3 +107,26 @@ $(() => {
 
 
 });
+
+
+
+function addToReservations(reservations = [], id, line) {
+
+    let element = $("#" + id);
+    if (!reservations.has(id)) {
+        reservations.set(id, line);
+        console.log("Added item to list");
+
+        element.children().css('color', 'red');
+        element.children().text("KYS");
+    }
+    else {
+        console.log("This item already exists");
+        reservations.delete(id);
+        element.children().css('color', 'yellow');
+        element.children().text("HUH");
+    }
+
+
+    console.log(reservations);
+}
