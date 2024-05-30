@@ -3,6 +3,7 @@ $(() => {
     let reservationTable = $("table#reservation-table");
 
     let casy = new Map();
+    let reservedTimes = [];
 
 
     if (reservationTable.length === 0) {
@@ -42,12 +43,12 @@ $(() => {
                 let idH = String(i + start) + "00" + lane.id;
                 let idM = String(i + start) + "30" + lane.id;
                 $("<td>").appendTo(laneContent).attr("id", idH).append("<button>HUH").on("click", function () {
-                    addToReservations(casy, idH, lane.id);
+                    addToReservations(casy, idH, lane.id, reservedTimes);
                 });
 
                 if (i != countOfTimeIntervals)
                     $("<td>").appendTo(laneContent).attr("id", idM).append("<button>HUH").on("click", function () {
-                        addToReservations(casy, idM, lane.id);
+                        addToReservations(casy, idM, lane.id, reservedTimes);
                     });
             }
 
@@ -72,8 +73,6 @@ $(() => {
             let Ehours = Number(reservation.endDate.substring(11, 13));
             let Eminutes = reservation.endDate.substring(14, 16);
 
-            let reservedTimes = [];
-
             reservedTimes.push($("table#reservation-table tr td#" + Shours + "" + Sminutes + "" + reservation.lane.id));
             reservedTimes.push($("table#reservation-table tr td#" + Ehours + "" + Eminutes + "" + reservation.lane.id));
 
@@ -95,6 +94,7 @@ $(() => {
             $.each(reservedTimes, function (i, time) {
                 time.children().text("KYS");
                 time.children().css('color', 'red');
+                time.children().prop('disabled', true);
             })
 
             // console.log(date);
@@ -110,23 +110,32 @@ $(() => {
 
 
 
-function addToReservations(reservations = [], id, line) {
+function addToReservations(reservations = [], id, line, reservedTimes) {
+    let timeIsOccupied;
 
-    let element = $("#" + id);
-    if (!reservations.has(id)) {
-        reservations.set(id, line);
-        console.log("Added item to list");
+    $(reservedTimes).each(function (i, reservedTime) {
+        console.log(reservedTime.attr("id"));
+        if (id === reservedTime.attr("id")) {
+            timeIsOccupied = true;
+        }
+    })
 
-        element.children().css('color', 'red');
-        element.children().text("KYS");
+    if (!timeIsOccupied) {
+        let element = $("#" + id);
+        if (!reservations.has(id)) {
+            reservations.set(id, line);
+            console.log("Added item to list");
+
+            element.children().css('color', 'yellow');
+            element.children().text("KYS");
+        }
+        else {
+            console.log("This item already exists");
+            reservations.delete(id);
+            element.children().css('color', 'black');
+            element.children().text("HUH");
+        }
+
     }
-    else {
-        console.log("This item already exists");
-        reservations.delete(id);
-        element.children().css('color', 'yellow');
-        element.children().text("HUH");
-    }
-
-
     console.log(reservations);
 }
