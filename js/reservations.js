@@ -107,8 +107,6 @@ $(() => {
     }).fail(function (textStatus, errorThrown) {
         console.log("Error fetching data: " + textStatus + errorThrown);
     });
-
-
 });
 
 
