@@ -37,7 +37,7 @@ $(() => {
     $.getJSON(drahyUrl, function (result) {
         $.each(result, function (i, lane) {
             // let laneContent = reservationTable.append("<tr>");
-            console.log(i,lane);
+            console.log(i, lane);
             let laneContent = $("<tr>").appendTo(reservationTable);
             // Row description 
             laneContent.append("<td> Lane " + lane.id + ":");
@@ -107,8 +107,6 @@ $(() => {
     }).fail(function (textStatus, errorThrown) {
         console.log("Error fetching data: " + textStatus + errorThrown);
     });
-
-
 });
 
 
