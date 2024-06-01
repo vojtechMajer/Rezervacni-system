@@ -103,11 +103,48 @@ $(() => {
         console.log("Error fetching data: " + textStatus + errorThrown);
     });;
 
-    var d = new Date();
-    var today = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
 
+    let dateInput = $("input#date");
+    let today = new Date();
+
+    // set default date to today
+    dateInput.val(today.yyyymmdd());
+    loadReservedTimes(today, timeIntervals, reservedTimes);
+
+    // add events
+    dateInput.on("change", function () {
+        let date = new Date(this.val());
+        loadReservedTimes(date, timeIntervals, reservedTimes);
+    });
+
+    $("button#date-next").on("click", function () {
+        let date = new Date(dateInput.val()).addDays(1);
+        dateInput.val(date.yyyymmdd())
+        console.log(date);
+        loadReservedTimes(date, timeIntervals, reservedTimes);
+    });
+
+    $("button#date-prev").on("click", function () {
+        let date = new Date(dateInput.val()).addDays(-1);
+        dateInput.val(date.yyyymmdd())
+        console.log(date);
+        loadReservedTimes(date, timeIntervals, reservedTimes);
+
+    });
+
+})
+
+function loadReservedTimes(date = Date, timeIntervals = Map, reservedTimes = Map) {
+    // clear reserved times from previous date
+    reservedTimes.forEach(cell => {
+        cell.children().css('color', 'black');
+        cell.children().text("HUH");
+    });
+    reservedTimes.clear();
+
+    let d = date.yyyymmdd();
     // disable all buttons which are already reserved and make fill hashmap with already reserved times 
-    $.getJSON("http://localhost/reservations/by-day?day=" + today, function (reservations) {
+    $.getJSON("http://localhost/reservations/by-day?day=" + d, function (reservations) {
 
         $.each(reservations, function (i, reservation) {
 
@@ -134,7 +171,7 @@ $(() => {
                 button.css('color', 'red');
                 button.prop('disabled', true);
 
-                reservedTimes.set(key, reservations[i]);
+                reservedTimes.set(key, cell);
 
                 // 17:30 -> 18:00
                 if (minutes == "30") {
@@ -150,7 +187,8 @@ $(() => {
     }).fail(function (textStatus, errorThrown) {
         console.log("Error fetching data: " + textStatus + errorThrown);
     });;
-});
+
+}
 
 function addToReservations(tableCell, reservedTimesHashMap = Map, orderedTimesHashMap = Map) {
 
@@ -178,4 +216,18 @@ function addToReservations(tableCell, reservedTimesHashMap = Map, orderedTimesHa
 
         console.log("added to order");
     }
+}
+
+// Date prototypes
+Date.prototype.yyyymmdd = function () {
+    var yyyy = this.getFullYear().toString();
+    var mm = (this.getMonth() + 1).toString();
+    var dd = this.getDate().toString();
+    return yyyy + "-" + (mm[1] ? mm : "0" + mm[0]) + "-" + (dd[1] ? dd : "0" + dd[0]);
+};
+
+Date.prototype.addDays = function (days) {
+    var date = new Date(this.valueOf());
+    date.setDate(date.getDate() + days);
+    return date;
 }
