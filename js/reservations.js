@@ -1,6 +1,8 @@
 $(() => {
+    // URL pro JSON return
     let drahyUrl = "http://localhost/lanes";
 
+    //kontrola existence tabulky v pohledu
     let reservationTable = $("table#reservation-table");
     if (reservationTable.length === 0) {
         console.log("Table not found!");
@@ -15,7 +17,7 @@ $(() => {
     let start = 8;
     let end = 18;
     let countOfTimeIntervals = end - start;
-    tableHeader.append("<th> DRAHY/ČASY");
+    tableHeader.append("<th> DRAHY\n/ČASY");
 
     // 2 kvůli půlhodinovým intervalům
     for (let i = 0; i <= countOfTimeIntervals; i++) {
@@ -30,10 +32,10 @@ $(() => {
     $.getJSON(drahyUrl, function (result) {
         $.each(result, function (i, lane) {
             // let laneContent = reservationTable.append("<tr>");
-
+            console.log(i,lane);
             let laneContent = $("<tr>").appendTo(reservationTable);
             // Row description 
-            laneContent.append("<td> " + lane.id);
+            laneContent.append("<td> Lane " + lane.id + ":");
 
             for (let i = 0; i <= countOfTimeIntervals; i++) {
 

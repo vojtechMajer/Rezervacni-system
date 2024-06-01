@@ -3,12 +3,13 @@
 class Lane
 {
     public $id;
-    public $hasBlocks;
+    public $safeGuard;
+    public $BlockedTime = ["1","test","mamals"];
 
-    public function __construct($id, $hasBlocks)
+    public function __construct($id, $safeGuard)
     {    
         $this->id = $id;
-        $this->hasBlocks = $hasBlocks;
+        $this->safeGuard = $safeGuard;
     }
 
 }
