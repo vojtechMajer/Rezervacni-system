@@ -28,6 +28,10 @@ $(() => {
     let hours = startH;
     let minutes = startM;
 
+    let dateInput = $("input#date");
+    let today = new Date();
+
+
     let tableHeader = $("<tr>");
     tableHeader.appendTo(reservationTable);
 
@@ -35,8 +39,6 @@ $(() => {
     tableHeader.append("<th>DRAHY\n/ČASY");
 
     while (hours != endH || minutes != endM) {
-        // console.log(hours + ":" + minutes);
-
         tableHeader.append("<th> " + hours + ":" + minutes);
         // 17:30 -> 18:00
         if (minutes == "30") {
@@ -53,7 +55,6 @@ $(() => {
     $.getJSON(drahyUrl, function (lanes) {
 
         $.each(lanes, function (i, lane) {
-            console.log(lane.id);
             // create new table row
             let laneRow = $("<tr>");
             // append it to table
@@ -67,7 +68,7 @@ $(() => {
             while (hours != endH || minutes != endM) {
                 // creat table cell
                 let timeInterval = $("<td>");
-                let id = hours + "" + minutes + "" + lane.id;
+                let id = ((hours <= 9) ? ("0" + hours) : (hours)) + "" + minutes + "" + lane.id;
 
                 $(timeInterval).attr("id", id);
                 // TODO:
@@ -77,6 +78,7 @@ $(() => {
 
                 button.on("click", function () {
                     addToReservations($(this).parent(), reservedTimes, orderedTimesHashMap);
+                    loadOrderedTimes(new Date(dateInput.val()), orderedTimesHashMap);
                 })
 
                 // append button to cell
@@ -98,14 +100,10 @@ $(() => {
                 }
             }
         })
-        console.log(timeIntervals);
     }).fail(function (textStatus, errorThrown) {
         console.log("Error fetching data: " + textStatus + errorThrown);
     });;
 
-
-    let dateInput = $("input#date");
-    let today = new Date();
 
     // set default date to today
     dateInput.val(today.yyyymmdd());
@@ -114,22 +112,35 @@ $(() => {
     // add events
     dateInput.on("change", function () {
         let date = new Date(this.val());
+
+        clearSelection(orderedTimesHashMap);
+        orderedTimesHashMap.clear();
+
         loadReservedTimes(date, timeIntervals, reservedTimes);
     });
 
     $("button#date-next").on("click", function () {
         let date = new Date(dateInput.val()).addDays(1);
+
+        clearSelection(orderedTimesHashMap);
+        orderedTimesHashMap.clear();
+
+        // Set date
         dateInput.val(date.yyyymmdd())
-        console.log(date);
+
         loadReservedTimes(date, timeIntervals, reservedTimes);
     });
 
     $("button#date-prev").on("click", function () {
         let date = new Date(dateInput.val()).addDays(-1);
-        dateInput.val(date.yyyymmdd())
-        console.log(date);
-        loadReservedTimes(date, timeIntervals, reservedTimes);
 
+        clearSelection(orderedTimesHashMap);
+        orderedTimesHashMap.clear();
+
+        // Set date
+        dateInput.val(date.yyyymmdd())
+
+        loadReservedTimes(date, timeIntervals, reservedTimes);
     });
 
 })
@@ -137,7 +148,9 @@ $(() => {
 function loadReservedTimes(date = Date, timeIntervals = Map, reservedTimes = Map) {
     // clear reserved times from previous date
     reservedTimes.forEach(cell => {
+
         cell.children().css('color', 'black');
+        cell.children().attr('disabled', false);
         cell.children().text("HUH");
     });
     reservedTimes.clear();
@@ -161,9 +174,7 @@ function loadReservedTimes(date = Date, timeIntervals = Map, reservedTimes = Map
             minutes = reservationStartM;
 
             while (hours != reservationEndH || minutes != reservationEndM) {
-                // console.log(hours + ":" + minutes);
-
-                let key = hours + "" + minutes + reservation.lane.id;
+                let key = ((hours <= 9) ? "0" + hours : hours) + "" + minutes + reservation.lane.id;
                 let cell = timeIntervals.get(key);
                 let button = $(cell).children();
 
@@ -190,35 +201,84 @@ function loadReservedTimes(date = Date, timeIntervals = Map, reservedTimes = Map
 
 }
 
+function loadOrderedTimes(date = Date, orderedTimesHashMap = Map) {
+    $("#reservations").empty();
+
+    orderedTimesHashMap.forEach(cell => {
+        console.log(cell.attr("id"));
+
+        $("#reservations").append("<input type='number' value='" + cell.attr("id").substring(4, 5) + "' > ");
+
+        let hours = cell.attr("id").substring(0, 2);
+        let minutes = cell.attr("id").substring(2, 4);
+        console.log(hours + ":" + minutes);
+        console.log(date.dateTime(hours, minutes));
+        $("#reservations").append("<input type='datetime-local' value='" + date.dateTime(hours, minutes) + "' > ");
+
+
+        // value="2017-06-01T08:30" />
+
+    })
+}
+
+
+function clearSelection(orderedTimesHashMap = Map) {
+    orderedTimesHashMap.forEach(cell => {
+        cell.children().css('color', 'black');
+        cell.children().attr('disabled', false);
+        cell.children().text("HUH");
+    });
+
+}
+
 function addToReservations(tableCell, reservedTimesHashMap = Map, orderedTimesHashMap = Map) {
 
     let key = $(tableCell).attr("id");
     if (reservedTimesHashMap.has(key))
         return;
 
-    console.log(key);
     if (orderedTimesHashMap.has(key)) {
-        // deselect
-        orderedTimesHashMap.delete(key);
 
+        orderedTimesHashMap.delete(key);
         // Mark deselected
         tableCell.children().css('color', 'black');
         tableCell.children().text("HUH");
-
         console.log("removed from order");
 
     } else {
         orderedTimesHashMap.set(key, tableCell);
 
-        // Mark selected
         tableCell.children().css('color', 'yellow');
         tableCell.children().text("KYS");
-
         console.log("added to order");
     }
 }
 
+
+
+
 // Date prototypes
+Date.prototype.dateTime = function (hours, minutes) {
+    // Convert the hours and minutes to integers
+    var hoursInt = parseInt(hours, 10);
+    var minutesInt = parseInt(minutes, 10);
+
+    // Set the hours and minutes
+    this.setHours(hoursInt);
+    this.setMinutes(minutesInt);
+
+    // Format the date to 'YYYY-MM-DDTHH:MM'
+    var year = this.getFullYear();
+    var month = ('0' + (this.getMonth() + 1)).slice(-2);
+    var day = ('0' + this.getDate()).slice(-2);
+    var hour = (hoursInt <= 9) ? "0" + hoursInt : hoursInt;
+    var minute = minutes;
+
+    console.log(`${year}-${month}-${day}T${hour}:${minute}`);
+    // Return the formatted string
+    return `${year}-${month}-${day}T${hour}:${minute}`;
+};
+
 Date.prototype.yyyymmdd = function () {
     var yyyy = this.getFullYear().toString();
     var mm = (this.getMonth() + 1).toString();
