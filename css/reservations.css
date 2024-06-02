@@ -1,0 +1,8 @@
+#reservation-table {
+    width: 90%;
+    margin: auto;
+}
+
+table#reservation-table button {
+    background-color: brown;
+}
