@@ -60,7 +60,7 @@ $(() => {
             // append it to table
             laneRow.appendTo(reservationTable);
             // append lane number as first value in row
-            laneRow.append("<th>" + lane.id);
+            laneRow.append("<th>" + lane.id + ". line");
 
             // reset hours and minutes
             hours = startH;
