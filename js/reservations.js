@@ -149,7 +149,7 @@ function loadReservedTimes(date = Date, timeIntervals = Map, reservedTimes = Map
     // clear reserved times from previous date
     reservedTimes.forEach(cell => {
 
-        cell.children().css('color', 'black');
+        cell.children().removeClass('selected');
         cell.children().attr('disabled', false);
         cell.children().text("HUH");
     });
@@ -179,7 +179,7 @@ function loadReservedTimes(date = Date, timeIntervals = Map, reservedTimes = Map
                 let button = $(cell).children();
 
                 button.text("KYS");
-                button.css('color', 'red');
+                button.addClass('selected');
                 button.prop('disabled', true);
 
                 reservedTimes.set(key, cell);
@@ -224,7 +224,7 @@ function loadOrderedTimes(date = Date, orderedTimesHashMap = Map) {
 
 function clearSelection(orderedTimesHashMap = Map) {
     orderedTimesHashMap.forEach(cell => {
-        cell.children().css('color', 'black');
+        cell.children().removeClass('selected');
         cell.children().attr('disabled', false);
         cell.children().text("HUH");
     });
@@ -241,14 +241,14 @@ function addToReservations(tableCell, reservedTimesHashMap = Map, orderedTimesHa
 
         orderedTimesHashMap.delete(key);
         // Mark deselected
-        tableCell.children().css('color', 'black');
+        tableCell.children().removeClass('selected');
         tableCell.children().text("HUH");
         console.log("removed from order");
 
     } else {
         orderedTimesHashMap.set(key, tableCell);
 
-        tableCell.children().css('color', 'yellow');
+        tableCell.children().addClass('selected');
         tableCell.children().text("KYS");
         console.log("added to order");
     }
