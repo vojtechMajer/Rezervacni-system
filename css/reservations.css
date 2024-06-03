@@ -10,10 +10,14 @@ div.reservation_table {
     padding: 10px;
 
     background-color: rgb(184, 184, 184);
+    border-width: 0px;
+    border-bottom: 20px;
+    border-style: solid;
+    border-color: #333;
     border-radius: 20px;
 }
 
-div.reservation_table div {
+div.reservation_table div.nav {
     width: fit-content;
 
     margin: auto;
@@ -21,13 +25,15 @@ div.reservation_table div {
 }
 
 div.reservation_table div  button{
-    width: 110%;
-    height: 110%;
+    width: 25px;
+    height: 25px;
+
+    font-weight: bold;
 }
 
 div.reservation_table div  input{
-    width: 110%;
-    height: 110%;
+    width: fit-content;
+    height: 20px;
 }
 
 table#reservation-table {
@@ -67,3 +73,20 @@ table#reservation-table button.selected {
     border-style: solid;
     border-radius: 0px;
 }
+
+table#reservation-table button.reserved {
+    background-color: gray;
+    color: rgb(54, 54, 54);
+    border-style: none;
+    border-radius: 5px;
+}
+/*
+div.reservation_table div.decor {
+    width: 100%;
+    height: 20px;
+
+    margin: 0;
+    padding: 0;
+
+    background-color: #333;
+}*/
