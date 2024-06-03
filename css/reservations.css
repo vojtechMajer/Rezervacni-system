@@ -102,10 +102,19 @@ form label {
     width:fit-content;
 
     margin: auto;
+    margin-bottom: 10px;
 }
 
 form div {
-    width: 355px;
+    width: 360px;
 
     margin: auto;
+}
+
+form div input {
+    padding: 5px;
+
+    background-color: whitesmoke;
+    border-style: none;
+    border-radius: 5px;
 }

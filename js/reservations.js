@@ -241,7 +241,7 @@ function addToReservations(tableCell, reservedTimesHashMap = Map, orderedTimesHa
 
         orderedTimesHashMap.delete(key);
         // Mark deselected
-        tableCell.children().removeClass('selected');
+        tableCell.children().Class('selected');
         tableCell.children().text("HUH");
         console.log("removed from order");
 
