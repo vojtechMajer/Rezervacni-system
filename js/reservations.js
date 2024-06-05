@@ -204,23 +204,65 @@ function loadReservedTimes(date = Date, timeIntervals = Map, reservedTimes = Map
 function loadOrderedTimes(date = Date, orderedTimesHashMap = Map) {
     $("#reservations").empty();
 
-    orderedTimesHashMap.forEach(cell => {
-        console.log(cell.attr("id"));
+    let sortedMap = new Map([...orderedTimesHashMap.entries()].sort(function (a, b) {
+        let hourA = Number($(a[1]).attr("id").substring(0, 2));
+        let hourB = Number($(b[1]).attr("id").substring(0, 2));
 
+        let minuteA = Number($(a[1]).attr("id").substring(2, 4));
+        let minuteB = Number($(b[1]).attr("id").substring(2, 4));
+
+        let laneA = Number($(a[1]).attr("id").substring(4, 5));
+        let laneB = Number($(b[1]).attr("id").substring(4, 5));
+
+        if (laneA != laneB) {
+            return laneA - laneB;
+        }
+        if (hourA != hourB) {
+            return hourA - hourB;
+        }
+
+        return minuteA - minuteB;
+    }));
+
+    let mergedReservations = mergeReservations(sortedMap);
+    console.log("Merged reservations");
+    console.log(mergedReservations);
+
+    sortedMap.forEach(cell => {
         $("#reservations").append("<input type='number' value='" + cell.attr("id").substring(4, 5) + "' > ");
 
         let hours = cell.attr("id").substring(0, 2);
         let minutes = cell.attr("id").substring(2, 4);
-        console.log(hours + ":" + minutes);
-        console.log(date.dateTime(hours, minutes));
         $("#reservations").append("<input type='datetime-local' value='" + date.dateTime(hours, minutes) + "' > ");
 
-
         // value="2017-06-01T08:30" />
-
     })
 }
 
+function mergeReservations(sortedReservations) {
+    // Dodelat
+    // if (sortedReservations.length === 0) return [];
+
+    // let mergedReservations = [];
+
+    // let currentStartId = $(sortedReservations[0]).attr("id");
+    // let currentEndId = $(sortedReservations[0]).attr("id");
+
+    // for (let i = 1; i < sortedReservations.length; i++) {
+    //     let currentReservationId = $(sortedReservations[i]).attr("id");
+    //     // 
+    //     if (currentStartId.substring(0, 4) === )
+
+    // }
+
+    // // Push the final range
+    // // mergedReservations.push({
+    // //     start: currentStartId.substring(0, 2) + ":" + currentStartId.substring(2, 4),
+    // //     end: currentEndId.substring(0, 2) + ":" + currentEndId.substring(2, 4)
+    // // });
+
+    // return mergedReservations;
+}
 
 function clearSelection(orderedTimesHashMap = Map) {
     orderedTimesHashMap.forEach(cell => {
@@ -241,7 +283,7 @@ function addToReservations(tableCell, reservedTimesHashMap = Map, orderedTimesHa
 
         orderedTimesHashMap.delete(key);
         // Mark deselected
-        tableCell.children().Class('selected');
+        tableCell.children().removeClass('selected');
         tableCell.children().text("HUH");
         console.log("removed from order");
 
@@ -274,7 +316,6 @@ Date.prototype.dateTime = function (hours, minutes) {
     var hour = (hoursInt <= 9) ? "0" + hoursInt : hoursInt;
     var minute = minutes;
 
-    console.log(`${year}-${month}-${day}T${hour}:${minute}`);
     // Return the formatted string
     return `${year}-${month}-${day}T${hour}:${minute}`;
 };
@@ -289,5 +330,11 @@ Date.prototype.yyyymmdd = function () {
 Date.prototype.addDays = function (days) {
     var date = new Date(this.valueOf());
     date.setDate(date.getDate() + days);
+    return date;
+}
+
+Date.prototype.addMinutes = function (minutes) {
+    var date = new Date(this.valueOf());
+    date.setMinutes(date.getMinutes() + minutes);
     return date;
 }
