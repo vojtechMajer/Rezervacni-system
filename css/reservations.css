@@ -3,7 +3,7 @@ div.spacer {
 }
 
 div.reservation_table {
-    width: 80%;
+    width: 90%;
     height: 100%;
 
     margin: auto;
@@ -55,7 +55,17 @@ table#reservation-table td {
     margin: 0px;
 }
 
+table#reservation-table th {
+    width: 50px;
+    height: 50px;
+    
+    margin: 0px;
+}
+
 table#reservation-table button {
+    position: relative;
+    left: 50%;
+
     width: 100%;
     height: 100%;
     
@@ -68,10 +78,18 @@ table#reservation-table button {
     cursor: pointer;
 }
 
+table#reservation-table button:hover {
+    background-color: rgb(154, 220, 241);
+}
+
 table#reservation-table button.selected {
     background-color: lightyellow;
     border-style: solid;
     border-radius: 0px;
+}
+
+table#reservation-table button.selected:hover {
+    background-color: rgb(255, 255, 209);
 }
 
 table#reservation-table button.reserved {
