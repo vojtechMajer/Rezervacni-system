@@ -1,6 +1,6 @@
 **Front end - Radovan Hrůza**
 TODO:
-Index
+Index ✓
 
 **Back end - David Lyko, Vojtěch Majer**
 Uživatel Model(User manager)
