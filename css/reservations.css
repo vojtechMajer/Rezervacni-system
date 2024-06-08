@@ -100,7 +100,7 @@ table#reservation-table button.reserved {
 }
 
 form {
-    width: 500px;
+    width: 510px;
     height: 100%;
 
     margin: auto;
@@ -124,7 +124,7 @@ form label {
 }
 
 form div {
-    width: 360px;
+    width: 490px;
 
     margin: auto;
 }
