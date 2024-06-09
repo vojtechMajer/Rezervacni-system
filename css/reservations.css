@@ -135,13 +135,13 @@ form label {
 }
 
 form div {
-    width: 490px;
+    width: 460px;
 
     margin: auto;
     align-content: center;
 }
 
-form div div.summary{
+form div div{
     display: inline-block;
     width: 170px;
 
@@ -152,15 +152,8 @@ form div div.summary{
     border-radius: 5px;
 }
 
-form div div.price{
-    display: inline-block;
-    width: 170px;
-
-    padding: 10px 20px 10px 20px;
-    margin: 10px 10px 10px 10px;
-
-    background: whitesmoke;
-    border-radius: 5px;
+form div div.summary {
+    width: 400px;
 }
 
 form div p {

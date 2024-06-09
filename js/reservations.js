@@ -210,6 +210,7 @@ function Summary(data, setings) {
 
 function DrawSummary(list, data) {
     list.empty();                                                                                                                               //Vyprazdneni puvodnich vysledku
+    price = 0;                                                                                                                                  //nastaveni celkove ceny na 0kc
     for (let i = 0; i < data.length; i++) {                                                                                                     //Prohledani celeho seznamu
         month = (Math.floor(Math.floor(data[i][1]) / 10) == 0) ? "0" + Math.floor(data[i][1]) : Math.floor(data[i][1]);                         //pokud je cislo mesice mensi nez 10 tak se prevede na string a prida se mu nula na zacatek 8 -> 08
         day = (Math.floor(Math.floor(data[i][2]) / 10) == 0) ? "0" + Math.floor(data[i][2]) : Math.floor(data[i][2]);                           //pokud je cislo dne mensi nez 10 tak se prevede na string a prida se mu nula na zacatek 8 -> 08
@@ -219,17 +220,19 @@ function DrawSummary(list, data) {
         hourE = (Math.floor(Math.floor(data[i][5] * 0.1) / 10) == 0) ? "0" + Math.floor(data[i][5] * 0.1) : Math.floor(data[i][5] * 0.1);       //pokud je hodina mensi nez 10 tak se prevede na string a prida se mu nula na zacatek 8 -> 08
         minE = (data[i][5] * 0.1 == Math.floor(data[i][5] * 0.1)) ? "00" : "30";                                                                //detekce zda je 00 a nebo 30 minut (15.5 -> 15:30; 15.0 -> 15:00)
         dateE = data[i][0] + "-" + month + "-" + day + "T" + hourE + ":" + minE;                                                                //slozeni roku, mesice, cisla dnu, hodin a minut do ISO formatu pro datum konce rezervace
-        string = ('<div class="summary">');
+        price += data[i][6];                                                                                                                    //navyseni celkove ceny o cenu aktualni rezervace
+        string = ('<div>');
         string += ("<p>Rezervace "+ (i+1) + ":</p>");
         string += ("<p>datum: " + day + "." + month + "." + data[i][0] +"</p>");
         string += ("<p>čas: " + hourS + ":" + minS + " - " + hourE + ":" + minE + "</p>");
-        string += ('<input disabled type="number" name="lane-number[]" value="' + data[i][3] + '">');                                          //pridani inputu s cislem drahy
-        string += ('<input disabled type="datetime-local" name="start-date[]" value="' + date + '"></input>');                                 //vlozeni ISO formatu do inputu a jeho vypys do formulare
-        string += ('<input disabled type="datetime-local" name="end-date[]" value="' + date + '"></input>');                               
+        string += ('<input disabled type="number" name="lane-number[]" value="' + data[i][3] + '">');                                          
+        string += ('<input disabled type="datetime-local" name="start-date[]" value="' + date + '"></input>');                                 
+        string += ('<input disabled type="datetime-local" name="end-date[]" value="' + date + '"></input>');                                    
         string += ("</div>");
-        string += ('<div class="price">');
+        string += ('<div>');
         string += ("<p>Price:</p>");
-        string += ("<p>" +  data[i][6] + " Kč</p>")
-        list.append(string);
+        string += ("<p>" +  data[i][6] + " Kč</p>");
+        list.append(string);                                                                                                                    //vytvoreni souhrnu jednotlivych rezervaci
     }
+    list.append('<div class="summary"><p><b>Celkova cena: ' + price + ' Kč<b></p></div>')
 }
