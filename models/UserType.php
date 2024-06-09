@@ -1,6 +1,6 @@
 <?php
-enum UserType
+enum UserType: string
 {
-    case admin;
-    case customer;
+    case admin = 'admin';
+    case customer = 'customer';
 }

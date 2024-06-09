@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="css/nav.css"> -->
     <?php foreach ($this->controller->css as $css): ?>
-            <link rel="stylesheet" href="<?= $css ?>">
+        <link rel="stylesheet" href="<?= $css ?>">
     <?php endforeach; ?>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -23,7 +23,11 @@
         <img id="logo" src="storage/Logo.PNG" alt="">
         <h1>Restaurace & Pivnice Jadran</h1>
         <ul>
-            <li><a href="login">Login</a></li>
+            <li>
+                <a href="login">
+                    <?php echo ($this->loggedUser == false) ? "login" : $this->loggedUser["username"] ?>
+                </a>
+            </li>
             <li><a href="createReservation">Rezervovat</a></li>
             <li><a href="index">Úvod</a></li>
         </ul>

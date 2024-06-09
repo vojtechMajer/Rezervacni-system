@@ -29,9 +29,8 @@ class CreateReservationController extends Controller
                 }
 
                 $addedReservation = ReservationManager::addReservation($lane, $reservationType, $startDate, $endDate);
-                $userId = $userManager->getLoggedUser()["user_id"];
                 // 0 -> host uživatel
-                ReservationManager::createOrder($addedReservation, (empty($userId)) ? 0 : $userId);
+                ReservationManager::createOrder($addedReservation, (empty($this->loggedUser["user_id"])) ? 0 : $this->loggedUser["user_id"]);
             }
         }
 
@@ -39,16 +38,3 @@ class CreateReservationController extends Controller
     }
 
 }
-
-
-
-
-/* $lane = LaneManager::getLaneById($_POST["lane"]);
-$reservationType = ReservationType::getReservationTypesById($_POST["reservation_type"]);
-
-if ($_POST["start_date"] === $_POST["end_date"]) {
-    $this->addMessage("rezervace nemůže začínat a končit ve stejný čas");
-    $this->redirect("createReservation");
-}
-ReservationManager::addReservation($lane, $reservationType, $_POST["start_date"], $_POST["end_date"]);
-*/

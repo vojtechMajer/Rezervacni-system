@@ -13,6 +13,22 @@ class AdministrationController extends Controller
             $this->redirect("index");
         }
 
-        $this->view = "administration";
+        switch ($parameters[0]) {
+            case 'users':
+                $users = $userManager->getAllCustomers();
+                $this->data["customers"] = $users;
+                $this->view = "administrationUsers";
+                break;
+            case 'lanes':
+                $lanes = LaneManager::getLanes();
+                $this->data["lanes"] = $lanes;
+                $this->view = "lanesOverview";
+                break;
+            default:
+                $this->view = "administration";
+                break;
+        }
+
+
     }
 }

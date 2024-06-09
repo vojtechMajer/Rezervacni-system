@@ -1,5 +1,18 @@
 <h1>Sprava uživatelu</h1>
 
 <?php
-var_dump($users);
+foreach ($customers as $index => $customer) {
+    echo $customer->id;
+    echo '<br>';
+    echo $customer->type->value;
+    echo '<br>';
+    echo $customer->username;
+    echo '<br>';
+    echo $customer->password;
+    echo '<br>';
+    echo '==================';
+    echo '<br>';
+
+
+}
 ?>
