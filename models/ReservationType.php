@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class ReservationType
 {
@@ -13,9 +13,9 @@ class ReservationType
 
     public static function getReservationTypes()
     {
-        $query = Db::queryAll( "select * from reservation_type" );
+        $query = Db::queryAll("select * from reservation_type");
         $reservationTypes = [];
-        
+
         foreach ($query as $row) {
             $reservationTypes[] = new ReservationType($row["id_reservation_type"], $row["name"]);
         }
@@ -25,8 +25,8 @@ class ReservationType
 
     public static function getReservationTypesById($id)
     {
-        $reservationType = DB::queryOne("select * from reservation_type where id_reservation_type = ? ", [$id]); 
+        $reservationType = DB::queryOne("select * from reservation_type where id_reservation_type = ? ", [$id]);
         return new ReservationType($reservationType["id_reservation_type"], $reservationType["name"]);
-
     }
+
 }

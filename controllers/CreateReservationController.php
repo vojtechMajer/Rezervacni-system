@@ -7,33 +7,40 @@ class CreateReservationController extends Controller
         $userManager = new UserManager();
 
         if (!empty($_POST)) {
-            $lane = LaneManager::getLaneById($_POST["lane"]);
-            $reservationType = ReservationType::getReservationTypesById($_POST["reservation_type"]);
+            // $_POST['lane-number'] $_POST['start-date']; $_POST['end-date']
+            $lanes = $_POST['lane-number'];
 
-            if ($_POST["start_date"] === $_POST["end_date"]) {
-                $this->addMessage("rezervace nemůže začínat a končit ve stejný čas");
-                $this->redirect("createReservation");
+            foreach ($lanes as $index => $lane) {
+
+                $lane = LaneManager::getLaneById($_POST['lane-number'][$index]);
+                $reservationType = ReservationType::getReservationTypesById(2);
+
+                $startDate = $_POST["start-date"][$index];
+                $endDate = $_POST["end-date"][$index];
+
+                if (ReservationManager::reservationOverlaps($startDate, $endDate, $lane)) {
+                    $this->addMessage("1 nebo více rezervací se překrývají s již existujícími rezervacemi");
+                    $this->redirect("createReservation");
+                }
+
+                ReservationManager::addReservation($lane, $reservationType, $startDate, $endDate);
             }
-
-            ReservationManager::addReservation($lane, $reservationType, $_POST["start_date"], $_POST["end_date"]);
-
-        }
-
-        $this->data["reservationTypes"] = ReservationType::getReservationTypes();
-        $this->data["lanes"] = LaneManager::getLanes();
-
-
-        $user = $userManager->getLoggedUser();
-
-        // id_user_type je 1 jesti je uživatel admin
-        if (empty($user)) {
-            $this->data["userType"] = 0;
-            $this->data["userId"] = 0;
-        } else {
-            $this->data["userType"] = $user["id_user_type"];
-            $this->data["userId"] = $user["id_user"];
         }
 
         $this->view = "createReservation";
     }
+
 }
+
+
+
+
+/* $lane = LaneManager::getLaneById($_POST["lane"]);
+$reservationType = ReservationType::getReservationTypesById($_POST["reservation_type"]);
+
+if ($_POST["start_date"] === $_POST["end_date"]) {
+    $this->addMessage("rezervace nemůže začínat a končit ve stejný čas");
+    $this->redirect("createReservation");
+}
+ReservationManager::addReservation($lane, $reservationType, $_POST["start_date"], $_POST["end_date"]);
+*/

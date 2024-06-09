@@ -82,7 +82,7 @@ class UserManager
         }
     }
 
-    public function getAllUsers()
+    public function getAllCustomers()
     {
         $query = Db::queryAll("select * from users where id_user_type = 2");
         $users = [];

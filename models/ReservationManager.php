@@ -80,15 +80,21 @@ class ReservationManager
     public static function addReservation(Lane $lane, ReservationType $reservationType, $startDate, $endDate)
     {
         $sql = "insert into reservation (id_reservation_type, id_lane, start, end) VALUES (?, ?, ?, ?)";
-
         Db::query($sql, [$reservationType->id, $lane->id, $startDate, $endDate]);
+
+        return true;
     }
 
-    public static function getOverlapingReservations($startDate, $endDate, Lane $lane)
+    public static function reservationOverlaps($startDate, $endDate, Lane $lane)
     {
-        $sql = "select * from reservation
-        where ( start <= STR_TO_DATE(?, '%Y-%m-%d %H:%i:%s') AND end >= STR_TO_DATE(?, '%Y-%m-%d %H:%i:%s')) 
-        AND id_lane = ? ";
+        $sql = "SELECT * 
+        FROM reservation
+        WHERE (
+            start < STR_TO_DATE(?, '%Y-%m-%dT%H:%i') 
+            AND end > STR_TO_DATE(?, '%Y-%m-%dT%H:%i')
+        ) 
+        AND id_lane = ?; 
+        ";
 
         $query = Db::queryAll($sql, [$endDate, $startDate, $lane->id]);
 
@@ -99,7 +105,7 @@ class ReservationManager
             $overlapReservations[] = new Reservation($row['id_reservation'], $row['id_reservation_type'], $lane, $row['start'], $row['end']);
         }
 
-        return $overlapReservations;
+        return (empty($overlapReservations) ? false : true);
     }
 
     public static function getReservationTypeNames()
@@ -108,4 +114,8 @@ class ReservationManager
         $reservationTypes = Db::queryOne("select * from reservation_type");
         return $reservationTypes["name"];
     }
-}// insert into reservation(id_reservation_type, id_reservation, id_lane, start, end) VALUES (1, 1, "2024-04-23 14:00:01", "2024-04-23 14:00:01")
+}
+// insert into reservation(id_reservation_type, id_reservation, id_lane, start, end) VALUES (1, 1, "2024-04-23 14:00:01", "2024-04-23 14:00:01")
+
+// 2024-06-09T14:30
+// 2024-06-09T16:30

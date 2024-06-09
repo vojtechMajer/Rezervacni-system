@@ -13,7 +13,7 @@ class AdministrationUsersController extends Controller
             $this->redirect("index");
         }
 
-        $users = $userManager->getAllUsers();
+        $users = $userManager->getAllCustomers();
 
         $this->data["users"] = $users;
 
