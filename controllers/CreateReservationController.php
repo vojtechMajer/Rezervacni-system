@@ -24,7 +24,7 @@ class CreateReservationController extends Controller
 
                 $lane = LaneManager::getLaneById($_POST['lane-number'][$index]);
 
-                $reservationType = ReservationType::getReservationTypesById((empty($_POST['reservation-type']) ? 0 : $_POST['reservation-type']));
+                $reservationType = ReservationType::getReservationTypesById((empty($_POST['reservation-type']) ? 1 : $_POST['reservation-type']));
 
                 $startDate = $_POST["start-date"][$index];
                 $endDate = $_POST["end-date"][$index];
