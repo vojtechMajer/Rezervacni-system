@@ -87,7 +87,6 @@ class ReservationManager
     public static function getOverlapingReservations($startDate, $endDate, Lane $lane)
     {
         $sql = "select * from reservation
-        
         where ( start <= STR_TO_DATE(?, '%Y-%m-%d %H:%i:%s') AND end >= STR_TO_DATE(?, '%Y-%m-%d %H:%i:%s')) 
         AND id_lane = ? ";
 

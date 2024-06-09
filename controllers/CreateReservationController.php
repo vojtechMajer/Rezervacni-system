@@ -32,9 +32,7 @@ class CreateReservationController extends Controller
         } else {
             $this->data["userType"] = $user["id_user_type"];
             $this->data["userId"] = $user["id_user"];
-
         }
-
 
         $this->view = "createReservation";
     }
