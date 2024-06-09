@@ -15,7 +15,20 @@
 
     <div id="reservations">
     </div>
-    <input type="submit" value="Submit Order" id="reservation-submit">
+    <?php
+
+    if ($user["id_user_type"] == 1) {
+        echo '<select name="reservation-type" id="reservation-type">';
+
+        foreach ($reservationTypes as $index => $reservationType) {
+            echo "<option value = " . $reservationType->id . ">" . $reservationType->name . "</option>";
+        }
+    }
+
+    ?>
+    </select>
+
+    <input type="submit" value="Submit Order" id="reservation-submit" enctype="multipart/form-data">
 
 </form>
 <script src="js/reservations.js"></script>

@@ -11,6 +11,11 @@ class CreateReservationController extends Controller
     {
         $userManager = new UserManager();
 
+        $this->data["reservationTypes"] = ReservationManager::getReservationTypes();
+
+        $user = $userManager->getLoggedUser();
+        $this->data["user"] = $user;
+
         if (!empty($_POST)) {
             // $_POST['lane-number'] $_POST['start-date']; $_POST['end-date']
             $lanes = $_POST['lane-number'];
@@ -18,7 +23,8 @@ class CreateReservationController extends Controller
             foreach ($lanes as $index => $lane) {
 
                 $lane = LaneManager::getLaneById($_POST['lane-number'][$index]);
-                $reservationType = ReservationType::getReservationTypesById(2);
+
+                $reservationType = ReservationType::getReservationTypesById((empty($_POST['reservation-type']) ? 0 : $_POST['reservation-type']));
 
                 $startDate = $_POST["start-date"][$index];
                 $endDate = $_POST["end-date"][$index];
@@ -29,8 +35,9 @@ class CreateReservationController extends Controller
                 }
 
                 $addedReservation = ReservationManager::addReservation($lane, $reservationType, $startDate, $endDate);
+
                 // 0 -> host uživatel
-                ReservationManager::createOrder($addedReservation, 0);
+                ReservationManager::createOrder($addedReservation, ($user == false) ? 0 : $user["id_user"]);
             }
         }
 

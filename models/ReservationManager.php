@@ -76,7 +76,6 @@ class ReservationManager
     }
 
 
-
     public static function addReservation(Lane $lane, ReservationType $reservationType, $startDate, $endDate)
     {
         $sql = "insert into reservation (id_reservation_type, id_lane, start, end) VALUES (?, ?, ?, ?)";
@@ -112,11 +111,16 @@ class ReservationManager
         return (empty($query) ? false : true);
     }
 
-    public static function getReservationTypeNames()
+    public static function getReservationTypes()
     {
         $reservationTypes = array();
-        $reservationTypes = Db::queryOne("select * from reservation_type");
-        return $reservationTypes["name"];
+        $query = Db::queryAll("select * from reservation_type");
+
+        foreach ($query as $reservationTypeRow) {
+            $reservationTypes[] = new ReservationType($reservationTypeRow["id_reservation_type"], $reservationTypeRow["name"]);
+        }
+
+        return $reservationTypes;
     }
 }
 // insert into reservation(id_reservation_type, id_reservation, id_lane, start, end) VALUES (1, 1, "2024-04-23 14:00:01", "2024-04-23 14:00:01")
