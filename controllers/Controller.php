@@ -5,7 +5,7 @@ abstract class Controller
     protected $data = []; // data kontroleru // např. pro sdílení mezi metodami
     protected $loggedUser;
 
-    public $css = ["css/nav.css","css/reservations.css"];
+    public $css = ["css/nav.css"];
 
     public $dontShowLayout = false;
 

@@ -2,6 +2,11 @@
 
 class CreateReservationController extends Controller
 {
+    function __construct()
+    {
+        $this->css = ["./css/nav.css", "css/reservations.css"];
+    }
+
     public function load($parameters)
     {
         $userManager = new UserManager();
