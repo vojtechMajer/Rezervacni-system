@@ -82,7 +82,18 @@ class ReservationManager
         $sql = "insert into reservation (id_reservation_type, id_lane, start, end) VALUES (?, ?, ?, ?)";
         Db::query($sql, [$reservationType->id, $lane->id, $startDate, $endDate]);
 
-        return true;
+        $id = Db::lastInsertId();
+        return new Reservation($id, $reservationType, $lane, $startDate, $endDate);
+    }
+
+    public static function createOrder(Reservation $reservation, $userId)
+    {
+        $sql = "insert into orders (id_reservation, id_user) VALUES (?, ?)";
+
+        Db::query($sql, [$reservation->id, $userId]);
+        $id = Db::lastInsertId();
+
+        return new Order($id, $reservation, $userId);
     }
 
     public static function reservationOverlaps($startDate, $endDate, Lane $lane)
@@ -98,14 +109,7 @@ class ReservationManager
 
         $query = Db::queryAll($sql, [$endDate, $startDate, $lane->id]);
 
-        $overlapReservations = array();
-
-        foreach ($query as $row) {
-            $lane = LaneManager::getLaneById($row["id_lane"]);
-            $overlapReservations[] = new Reservation($row['id_reservation'], $row['id_reservation_type'], $lane, $row['start'], $row['end']);
-        }
-
-        return (empty($overlapReservations) ? false : true);
+        return (empty($query) ? false : true);
     }
 
     public static function getReservationTypeNames()
