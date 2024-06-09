@@ -217,17 +217,21 @@ function DrawSummary(list, data) {
         hourS = (Math.floor(Math.floor(data[i][4] * 0.1) / 10) == 0) ? "0" + Math.floor(data[i][4] * 0.1) : Math.floor(data[i][4] * 0.1);       //pokud je hodina mensi nez 10 tak se prevede na string a prida se mu nula na zacatek 8 -> 08
         minS = (data[i][4] * 0.1 == Math.floor(data[i][4] * 0.1)) ? "00" : "30";                                                                //detekce zda je 00 a nebo 30 minut (15.5 -> 15:30; 15.0 -> 15:00)
         dateS = data[i][0] + "-" + month + "-" + day + "T" + hourS + ":" + minS;                                                                //slozeni roku, mesice, cisla dnu, hodin a minut do ISO formatu pro datum zacatku rezervace
+        console.log(minS + ";" + hourS + ";" + dateS);
+
         hourE = (Math.floor(Math.floor(data[i][5] * 0.1) / 10) == 0) ? "0" + Math.floor(data[i][5] * 0.1) : Math.floor(data[i][5] * 0.1);       //pokud je hodina mensi nez 10 tak se prevede na string a prida se mu nula na zacatek 8 -> 08
         minE = (data[i][5] * 0.1 == Math.floor(data[i][5] * 0.1)) ? "00" : "30";                                                                //detekce zda je 00 a nebo 30 minut (15.5 -> 15:30; 15.0 -> 15:00)
         dateE = data[i][0] + "-" + month + "-" + day + "T" + hourE + ":" + minE;                                                                //slozeni roku, mesice, cisla dnu, hodin a minut do ISO formatu pro datum konce rezervace
+        console.log(minE + ";" + hourE + ";" + dateE);
+
         price += data[i][6];                                                                                                                    //navyseni celkove ceny o cenu aktualni rezervace
         string = ('<div>');
         string += ("<p>Rezervace "+ (i+1) + ":</p>");
         string += ("<p>datum: " + day + "." + month + "." + data[i][0] +"</p>");
         string += ("<p>čas: " + hourS + ":" + minS + " - " + hourE + ":" + minE + "</p>");
         string += ('<input disabled type="number" name="lane-number[]" value="' + data[i][3] + '">');                                          
-        string += ('<input disabled type="datetime-local" name="start-date[]" value="' + date + '"></input>');                                 
-        string += ('<input disabled type="datetime-local" name="end-date[]" value="' + date + '"></input>');                                    
+        string += ('<input disabled type="datetime-local" name="start-date[]" value="' + dateS + '"></input>');                                 
+        string += ('<input disabled type="datetime-local" name="end-date[]" value="' + dateE + '"></input>');                                    
         string += ("</div>");
         string += ('<div>');
         string += ("<p>Price:</p>");
