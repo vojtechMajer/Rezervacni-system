@@ -10,7 +10,7 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL
 );
 
-CREATE TABLE `order` (
+CREATE TABLE `orders` (
   `id_order` integer PRIMARY KEY AUTO_INCREMENT,
   `id_reservation` integer NOT NULL,
   `id_user` integer NOT NULL
@@ -46,10 +46,10 @@ ALTER TABLE `announcement` ADD FOREIGN KEY (`id_user`) REFERENCES `users` (`id_u
 
 ALTER TABLE `users` ADD FOREIGN KEY (`id_user_type`) REFERENCES `user_type` (`id_user_type`);
 
-ALTER TABLE `order` ADD FOREIGN KEY (`id_reservation`) REFERENCES `reservation` (`id_reservation`);
+ALTER TABLE `orders` ADD FOREIGN KEY (`id_reservation`) REFERENCES `reservation` (`id_reservation`);
 
 ALTER TABLE `reservation` ADD FOREIGN KEY (`id_lane`) REFERENCES `lane` (`id_lane`);
 
 ALTER TABLE `reservation` ADD FOREIGN KEY (`id_reservation_type`) REFERENCES `reservation_type` (`id_reservation_type`);
 
-ALTER TABLE `order` ADD FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`);
+ALTER TABLE `orders` ADD FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`);
