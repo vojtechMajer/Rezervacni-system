@@ -98,6 +98,17 @@ table#reservation-table button.reserved {
     border-style: none;
     border-radius: 5px;
 }
+/*
+div#nav button.confirm {
+    position:absolute;
+    right: 5px;
+
+
+    background-color: whitesmoke;
+    color: rgb(54, 54, 54);
+    border-style: none;
+    border-radius: 5px;
+}*/
 
 form {
     width: 510px;
@@ -127,12 +138,37 @@ form div {
     width: 490px;
 
     margin: auto;
+    align-content: center;
+}
+
+form div div.summary{
+    display: inline-block;
+    width: 170px;
+
+    padding: 10px 20px 10px 20px;
+    margin: 10px 10px 10px 10px;
+
+    background: whitesmoke;
+    border-radius: 5px;
+}
+
+form div div.price{
+    display: inline-block;
+    width: 170px;
+
+    padding: 10px 20px 10px 20px;
+    margin: 10px 10px 10px 10px;
+
+    background: whitesmoke;
+    border-radius: 5px;
+}
+
+form div p {
+    width: fit-content;
+
+    margin: auto;
 }
 
 form div input {
-    padding: 5px;
-
-    background-color: whitesmoke;
-    border-style: none;
-    border-radius: 5px;
+    display: none;
 }

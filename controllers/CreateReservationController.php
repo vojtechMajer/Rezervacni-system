@@ -30,7 +30,7 @@ class CreateReservationController extends Controller
 
                 $addedReservation = ReservationManager::addReservation($lane, $reservationType, $startDate, $endDate);
                 // 0 -> host uživatel
-                ReservationManager::createOrder($addedReservation, (empty($this->loggedUser["user_id"])) ? 0 : $this->loggedUser["user_id"]);
+                ReservationManager::createOrder($addedReservation, 0);
             }
         }
 
