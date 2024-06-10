@@ -10,4 +10,4 @@ function loadClass($className)
 }
 
 spl_autoload_register("loadClass");
-Db::connect("152.70.163.36", "vmajer", "password", "bowling");
+Db::connect("localhost", "vmajer", "password", "bowling");
