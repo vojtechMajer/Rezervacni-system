@@ -1,6 +1,11 @@
 <?php
 class LoginController extends Controller 
 {
+    function __construct()
+    {
+        $this->css = ["./css/nav.css", "css/login.css"];
+    }
+
     public function load($parameters)
     {
         $userManager = new UserManager();

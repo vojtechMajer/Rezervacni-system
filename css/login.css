@@ -1,0 +1,52 @@
+h1 {
+    width: fit-content;
+    height: 100%;
+
+    margin: auto;
+    padding: 20px;
+}
+
+form {
+    width: fit-content;
+    height: 100%;
+
+    margin: auto;
+    padding: 20px;
+
+    background-color: rgb(184, 184, 184);
+    border-width: 0px;
+    border-bottom: 20px;
+    border-style: solid;
+    border-color: #333;
+    border-radius: 20px;
+}
+
+label {
+    display: block;
+
+    margin-top: 10px;
+}
+
+input {
+    display: block;
+    width: 200px;
+    height: 25px;
+
+    margin: auto;
+}
+
+input.login{
+    width: 200px;
+    height: 30px;
+    
+    margin: auto;
+    margin-top: 20px;
+
+    background: whitesmoke;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(160, 160, 160);
+    border-radius: 5px;
+
+    cursor: pointer;
+}
