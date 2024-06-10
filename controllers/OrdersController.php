@@ -10,17 +10,21 @@ class OrdersController extends Controller
     public function load($parameters)
     {
         $userManager = new UserManager();
+        $user = $userManager->getLoggedUser();
+
         // zobrazení a rušení objednávek
+        if ($user) {
+            $this->data["orders"] = OrderManager::getAllOrdersFromUser($user["id_user"]);
 
+            if (!empty($_POST)) {
+                // also deletes order
+                ReservationManager::removeReservation($_POST["reservation-id"]);
+            }
 
-        if (!empty($_POST)) {
-
-            // also deletes order
-            ReservationManager::removeReservation($_POST["reservation-id"]);
+        } else {
+            $this->addMessage("nejste přihlášeni nelze si prohlížet objednávky");
+            $this->redirect("index");
         }
-
-        $this->data["orders"] = OrderManager::getAllOrders();
-
 
         $this->view = "orders";
     }

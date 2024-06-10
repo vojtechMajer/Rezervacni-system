@@ -23,7 +23,7 @@ class OrderManager
 
     public static function getAllOrdersFromUser($userId)
     {
-        $orderQuery = Db::queryAll("select * from orders where id_user = ?");
+        $orderQuery = Db::queryAll("select * from orders where id_user = ?", [$userId]);
 
         $reservations = OrderManager::queryToOrders($orderQuery);
         return $reservations;
