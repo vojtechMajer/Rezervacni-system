@@ -1,8 +1,6 @@
 <?php
 require "init.php";
 
-echo "kys";
-
 $smerovac = new RouteController();
 
 $smerovac->load([$_SERVER["REQUEST_URI"]]);
