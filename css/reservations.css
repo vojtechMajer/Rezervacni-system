@@ -98,17 +98,24 @@ table#reservation-table button.reserved {
     border-style: none;
     border-radius: 5px;
 }
-/*
-div#nav button.confirm {
-    position:absolute;
-    right: 5px;
 
+div.reservation_table button#confirm {
+    position: relative;
+    display: block;
+    left: calc(100% - 220px);
+    width: 200px;
 
-    background-color: whitesmoke;
-    color: rgb(54, 54, 54);
-    border-style: none;
+    padding: 10px 20px 10px 20px;
+    margin-top: 10px;
+
+    background: whitesmoke;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(160, 160, 160);
     border-radius: 5px;
-}*/
+
+    cursor: pointer;
+}
 
 form {
     width: 510px;
@@ -164,4 +171,29 @@ form div p {
 
 form div input {
     display: none;
+}
+
+form p {
+    position: relative;
+    display: block;
+    width: fit-content;
+    
+    margin: auto;
+}
+
+form input {
+    display: block;
+    left: 50%;
+    width: 200px;
+
+    padding: 10px 20px 10px 20px;
+    margin: auto;
+
+    background: whitesmoke;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(160, 160, 160);
+    border-radius: 5px;
+
+    cursor: pointer;
 }
