@@ -12,6 +12,13 @@ class ReservationManager
         }
         return $reservations;
     }
+
+    public static function removeReservation($id)
+    {
+        $sql = "DELETE FROM reservation where id_reservation = ?";
+        Db::query($sql, [$id]);
+    }
+
     public static function getAllReservations()
     {
         $reservationsQuery = array();
@@ -44,15 +51,15 @@ class ReservationManager
             WHERE  YEARWEEK(start, 1) = YEARWEEK(?, 1)",
             [$date]
         );
-
+        // Array rezervací
         $reservations = array();
+
+        // Přidání objektů Rezervací do vytvořeného pole 
         foreach ($reservationsQuery as $reservationQuery) {
             $lane = LaneManager::getLaneById($reservationQuery["id_lane"]);
-
             $reservations[] =
                 new Reservation($reservationQuery["id_reservation"], $reservationQuery["id_reservation_type"], $lane, $reservationQuery["start"], $reservationQuery["end"]);
         }
-
         return $reservations;
     }
 
@@ -73,6 +80,14 @@ class ReservationManager
         }
 
         return $reservations;
+    }
+
+    public static function getReservationById($id)
+    {
+        $query = Db::queryOne("select * FROM reservation where id_reservation = ?", [$id]);
+        $lane = LaneManager::getLaneById($query["id_lane"]);
+
+        return new Reservation($query["id_reservation"], $query["id_reservation_type"], $lane, $query["start"], $query["end"]);
     }
 
 

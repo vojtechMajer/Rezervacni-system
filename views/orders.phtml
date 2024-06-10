@@ -1,0 +1,35 @@
+<table>
+    <tr>
+        <th>pořadí</th>
+        <th>začátek rezervace</th>
+        <th>konec rezervace</th>
+        <th>číslo dráhy</th>
+        <th>Zrušit rezervaci</th>
+    </tr>
+    <?php
+
+    foreach ($orders as $index => $order) {
+        echo "<tr>";
+
+        echo "<td>" . $index + 1 . ". </td>";
+        echo "<td>" . $order->reservation->startDate . "</td>";
+        echo "<td>" . $order->reservation->endDate . "</td>";
+        echo "<td>" . $order->reservation->lane->id . "</td>";
+
+        echo "<td>";
+        echo '<form method="POST">';
+        echo '<input name="reservation-id" type="hidden" value="' . $order->reservation->id . '">';
+        echo '<input type="submit" value="X">';
+        echo '</form>';
+        echo "</td>";
+
+        echo "</tr>";
+    }
+
+    ?>
+</table>
+<?php
+if (empty($orders)) {
+    echo "žádné objednávky!!!";
+}
+?>

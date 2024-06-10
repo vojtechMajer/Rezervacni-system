@@ -22,18 +22,20 @@ class ReservationsController extends Controller
         //     date("Y-m-d H:i:s", mktime(18, 00, 0, 5, 14, 2024))
         // );
 
-        // http://localhost/reservations/in-week?week=2024-05-26
         switch ($parameters[0]) {
+            // příklad url: http://localhost/reservations/in-week?week=2024-05-26
             case 'in-week':
                 if (isset($_GET["week"])) {
                     $reservations = ReservationManager::getReservationsInWeek(date('Y-m-d', strtotime($_GET['week'])));
-                    // $this->data["reservations"] = $reservations;
+                    // zakodování dat do JSON formátu data se pak v pohledu vypíší
                     $this->data["reservationsJSON"] = json_encode($reservations);
-                } else {
+                }
+                // v případě špatně zadaného parametru week
+                else {
                     $this->data["reservationsJSON"] = "[]";
                 }
-
                 break;
+            // příklad url: http://localhost/reservations/by-date?date=2024-05-26
             case 'by-day':
                 if (isset($_GET["day"])) {
                     $reservations = ReservationManager::getReservationsOnDate(date('Y-m-d', strtotime($_GET['day'])));
