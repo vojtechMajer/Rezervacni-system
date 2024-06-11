@@ -48,11 +48,13 @@
             $this->controller->showView();
             ?>
 
-    <?php foreach ($messages as $message): ?>
-        <div class="zprava">
-            <?= $message["text"] ?>
-        </div>
-    <?php endforeach; ?>
+    <div class="zprava">
+        <?php foreach ($messages as $message) {
+            echo "<p>" . $message["text"] . "</p>";
+        }
+        ?>
+
+    </div>
 
 </body>
 
