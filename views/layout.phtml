@@ -29,14 +29,18 @@
                 </a>
             </li>
             <li><a href="createReservation">Rezervovat</a></li>
-            <li><a href="index">Úvod</a></li>
-        </ul>
-    </nav>
 
-    <div class="navBG navBGcon"></div>
-    <?php
-    $this->controller->showView();
-    ?>
+            <?php if ($this->loggedUser != false)
+                echo '<li><a href="orders">Objednávky</a></li>'
+                    ?>
+                <li><a href="index">Úvod</a></li>
+            </ul>
+        </nav>
+
+        <div class="navBG navBGcon"></div>
+        <?php
+            $this->controller->showView();
+            ?>
 
     <?php foreach ($messages as $message): ?>
         <div class="zprava">
