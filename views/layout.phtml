@@ -45,21 +45,18 @@
 
         <div class="navBG navBGcon"></div>
 
-        <div class="zprava">
-            <p>testovaci zprava</p>
-        </div>
-
         <?php
             $this->controller->showView();
             ?>
 
-    <div class="zprava">
-        <?php foreach ($messages as $message) {
-            echo "<p>" . $message["text"] . "</p>";
-        }
-        ?>
+        <div class="oznameni">
+            <?php foreach ($messages as $message) {
+                echo '<div class="zprava"><p>' . $message["text"] . "</p></div>";
+            }
+            ?>
+        </div>
 
-    </div>
+    
 
 </body>
 

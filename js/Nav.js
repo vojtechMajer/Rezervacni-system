@@ -13,4 +13,8 @@ $(function () {
       $('.navBG').removeClass('navBGex');
     }
   });
+
+  $("div.zprava").on("click", function () {
+    $(this).hide();
+  })
 });

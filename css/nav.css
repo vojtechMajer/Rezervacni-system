@@ -139,14 +139,23 @@ body {
     background-color: whitesmoke;    
 }
 
-div.zprava {
+div.oznameni {
   position: sticky;
   position: -webkit-sticky; /* Safari */
+  display: block;
+  width: fit-content;
+  height: fit-content;
 
+  left: calc(100% - 250px);
+  bottom: 25px;
+
+}
+
+div.zprava {
   width: 200px;
-  height: 30px;
+  height: fit-content;
 
-  padding: 5px;
+  padding: 10px 5px 10px 5px;
   
   background: whitesmoke;
   border-width: 1px;
