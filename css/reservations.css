@@ -139,6 +139,8 @@ div.reservation_table button#confirm {
 }
 
 form {
+    display: none;
+
     width: 510px;
     height: 100%;
 
@@ -200,6 +202,7 @@ form p {
     width: fit-content;
     
     margin: auto;
+    margin-top: 10px;
 }
 
 form input {

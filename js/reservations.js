@@ -169,10 +169,10 @@ function DrawTable(reservationTable, setUp, date, data) {
                 }
                 $(button).on("click", function () {                                                             //pridni eventu on:click na aktualni tlacitko                    
                     if ($(this).attr('class') == 'sprava' ) {}                                                  //kontrola zda dane tlacitko neni oznacene jako sprava
-                    else if ($(this).attr('class') != 'reserved' ) {}                                           //kontrola zda dane tlacitko neni oznacene jako rezervace
-                    else if ($(this).attr('class') != 'soutez' ) {}                                             //kontrola zda dane tlacitko neni oznacene jako soutez
-                    else if ($(this).attr('class') != 'error' ) {}                                              //kontrola zda dane tlacitko neni oznacene jako rezervace
-                    else if ($(this).attr("class") != 'selected' && skip !=1) {                                 //kontrola zda jiz bylo tlacitko vybrano pokud ano ->
+                    else if ($(this).attr('class') == 'reserved' ) {}                                           //kontrola zda dane tlacitko neni oznacene jako rezervace
+                    else if ($(this).attr('class') == 'soutez' ) {}                                             //kontrola zda dane tlacitko neni oznacene jako soutez
+                    else if ($(this).attr('class') == 'error' ) {}                                              //kontrola zda dane tlacitko neni oznacene jako rezervace
+                    else if ($(this).attr("class") == 'selected') {                                             //kontrola zda jiz bylo tlacitko vybrano pokud ano ->
                         data.splice(data.indexOf(date.val() + "-" + i + "-" + j * 10), 1);                      //odebere se ze seznmu vybranych (array data)
                         $(this).removeClass("selected");                                                        //odebere se mu classa "selected"
                     } else {                                                                                    //pokud vybrano nebylo ->
