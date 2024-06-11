@@ -142,7 +142,20 @@ function DrawTable(reservationTable, setUp, date, data) {
             $.each(rezervations, function (i, reservation) {
                 for (i = ISOdateToHours(reservation.startDate); i < ISOdateToHours(reservation.endDate); i += 0.5) {
                     let button = "button#" + reservation.lane.id + "-" + i * 10                                     //priprava pro nalezeni tlacitka
-                    $(button).text("X").addClass('reserved');                                                       //nalezeni tlacitka a oznaceni tlacitka jako rezervovano
+                    switch(reservation.type) {                                                                      //rozdeleni podle typu rezervace
+                        case 1: {
+                            $(button).text("-").addClass('sprava');                                                       //nalezeni tlacitka a oznaceni tlacitka jako sprava
+                        }break;
+                        case 2: {
+                            $(button).text("X").addClass('reserved');                                                       //nalezeni tlacitka a oznaceni tlacitka jako rezervovano
+                        }break;
+                        case 2: {
+                            $(button).text("S").addClass('soutez');                                                       //nalezeni tlacitka a oznaceni tlacitka jako soutez
+                        }break;
+                        default: {
+                            $(button).text("!").addClass('error');                                                       //nalezeni tlacitka a oznaceni tlacitka jako error
+                        }break;
+                    }                    
                 }
             })
         })

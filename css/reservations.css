@@ -92,8 +92,29 @@ table#reservation-table button.selected:hover {
     background-color: rgb(255, 255, 209);
 }
 
+table#reservation-table button.sprava {
+    background-color: gray;
+    color: rgb(54, 54, 54);
+    border-style: none;
+    border-radius: 5px;
+}
+
 table#reservation-table button.reserved {
     background-color: gray;
+    color: rgb(54, 54, 54);
+    border-style: none;
+    border-radius: 5px;
+}
+
+table#reservation-table button.soutez {
+    background-color: rgb(175, 95, 162);
+    color: rgb(54, 54, 54);
+    border-style: none;
+    border-radius: 5px;
+}
+
+table#reservation-table button.chyba {
+    background-color: rgb(255, 159, 239);
     color: rgb(54, 54, 54);
     border-style: none;
     border-radius: 5px;
