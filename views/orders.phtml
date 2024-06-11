@@ -1,10 +1,16 @@
 <table>
     <tr>
         <th>pořadí</th>
+        <?php
+        if ($user["id_user_type"] == 1) {
+            echo "<th>ID uživatele</th>";
+        }
+        ?>
         <th>začátek rezervace</th>
         <th>konec rezervace</th>
         <th>číslo dráhy</th>
         <th>Zrušit rezervaci</th>
+
     </tr>
     <?php
 
@@ -12,9 +18,14 @@
         echo "<tr>";
 
         echo "<td>" . $index + 1 . ". </td>";
+        if ($user["id_user_type"] == 1) {
+            echo "<td>" . $order->userId . "</td>";
+        }
+
         echo "<td>" . $order->reservation->startDate . "</td>";
         echo "<td>" . $order->reservation->endDate . "</td>";
         echo "<td>" . $order->reservation->lane->id . "</td>";
+
 
         echo "<td>";
         echo '<form method="POST">';
