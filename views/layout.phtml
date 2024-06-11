@@ -28,7 +28,12 @@
                     <?php echo ($this->loggedUser == false) ? "login" : $this->loggedUser["username"] ?>
                 </a>
             </li>
-            <li><a href="createReservation">Rezervovat</a></li>
+            <?php
+            if ($this->loggedUser != false)
+                echo '<li><a href="logout">Logout</a></li>'
+                    ?>
+
+                <li><a href="createReservation">Rezervovat</a></li>
 
             <?php if ($this->loggedUser != false)
                 echo '<li><a href="orders">Objednávky</a></li>'
