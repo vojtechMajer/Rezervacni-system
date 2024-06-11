@@ -138,3 +138,27 @@ div.navBGcon{
 body {
     background-color: whitesmoke;    
 }
+
+div.zprava {
+  position: sticky;
+  position: -webkit-sticky; /* Safari */
+
+  width: 200px;
+  height: 30px;
+
+  padding: 5px;
+  
+  background: whitesmoke;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(160, 160, 160);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+div.zprava p {
+  width: fit-content;
+  height: fit-content;
+
+  margin: auto;
+}

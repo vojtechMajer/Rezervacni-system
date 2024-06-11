@@ -44,16 +44,14 @@
         </nav>
 
         <div class="navBG navBGcon"></div>
+
+        <div class="zprava">
+            <p>testovaci zprava</p>
+        </div>
+        
         <?php
             $this->controller->showView();
             ?>
-
-    <?php foreach ($messages as $message): ?>
-        <div class="zprava">
-            <?= $message["text"] ?>
-        </div>
-    <?php endforeach; ?>
-
 </body>
 
 </html>
