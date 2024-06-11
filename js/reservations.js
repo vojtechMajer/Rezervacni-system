@@ -144,16 +144,16 @@ function DrawTable(reservationTable, setUp, date, data) {
                     let button = "button#" + reservation.lane.id + "-" + i * 10                                     //priprava pro nalezeni tlacitka
                     switch(reservation.type) {                                                                      //rozdeleni podle typu rezervace
                         case 1: {
-                            $(button).text("-").addClass('sprava');                                                       //nalezeni tlacitka a oznaceni tlacitka jako sprava
+                            $(button).text("-").addClass('sprava');                                                 //nalezeni tlacitka a oznaceni tlacitka jako sprava
                         }break;
                         case 2: {
-                            $(button).text("X").addClass('reserved');                                                       //nalezeni tlacitka a oznaceni tlacitka jako rezervovano
+                            $(button).text("X").addClass('reserved');                                               //nalezeni tlacitka a oznaceni tlacitka jako rezervovano
                         }break;
-                        case 2: {
-                            $(button).text("S").addClass('soutez');                                                       //nalezeni tlacitka a oznaceni tlacitka jako soutez
+                        case 3: {
+                            $(button).text("S").addClass('soutez');                                                 //nalezeni tlacitka a oznaceni tlacitka jako soutez
                         }break;
                         default: {
-                            $(button).text("!").addClass('error');                                                       //nalezeni tlacitka a oznaceni tlacitka jako error
+                            $(button).text("!").addClass('error');                                                  //nalezeni tlacitka a oznaceni tlacitka jako error
                         }break;
                     }                    
                 }
@@ -167,15 +167,17 @@ function DrawTable(reservationTable, setUp, date, data) {
                 if (data.indexOf(date.val() + "-" + i + "-" + j * 10) != -1) {                                      //kontrola zda se aktualni tlacitko nachazi v array data (bylo jiz vybrano do rezervace)
                     $(button).addClass("selected");                                                                 //pokud ano -> prida se mu classa "selected"
                 }
-                $(button).on("click", function () {                                                                 //pridni eventu on:click na aktualni tlacitko
-                    if ($(this).attr('class') != 'reserved') {                                                      //kontrola zda dane tlacitko neni jiz zareervovane
-                        if ($(this).attr("class") == 'selected') {                                                  //kontrola zda jiz bylo tlacitko vybrano pokud ano ->
-                            data.splice(data.indexOf(date.val() + "-" + i + "-" + j * 10), 1);                      //odebere se ze seznmu vybranych (array data)
-                            $(this).removeClass("selected");                                                        //odebere se mu classa "selected"
-                        } else {                                                                                    //pokud vybrano nebylo ->
-                            data.push(date.val() + "-" + i + "-" + j * 10)                                          //pridani talcitka do seznamu vybranych (array data)
-                            $(this).addClass("selected");                                                           //pridani classy "selected"
-                        }
+                $(button).on("click", function () {                                                             //pridni eventu on:click na aktualni tlacitko                    
+                    if ($(this).attr('class') == 'sprava' ) {}                                                  //kontrola zda dane tlacitko neni oznacene jako sprava
+                    else if ($(this).attr('class') != 'reserved' ) {}                                           //kontrola zda dane tlacitko neni oznacene jako rezervace
+                    else if ($(this).attr('class') != 'soutez' ) {}                                             //kontrola zda dane tlacitko neni oznacene jako soutez
+                    else if ($(this).attr('class') != 'error' ) {}                                              //kontrola zda dane tlacitko neni oznacene jako rezervace
+                    else if ($(this).attr("class") != 'selected' && skip !=1) {                                 //kontrola zda jiz bylo tlacitko vybrano pokud ano ->
+                        data.splice(data.indexOf(date.val() + "-" + i + "-" + j * 10), 1);                      //odebere se ze seznmu vybranych (array data)
+                        $(this).removeClass("selected");                                                        //odebere se mu classa "selected"
+                    } else {                                                                                    //pokud vybrano nebylo ->
+                        data.push(date.val() + "-" + i + "-" + j * 10)                                          //pridani talcitka do seznamu vybranych (array data)
+                        $(this).addClass("selected");                                                           //pridani classy "selected"
                     }
                 })
             }
