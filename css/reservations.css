@@ -139,8 +139,6 @@ div.reservation_table button#confirm {
 }
 
 form {
-    display: none;
-
     width: 510px;
     height: 100%;
 
