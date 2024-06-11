@@ -48,10 +48,19 @@
         <div class="zprava">
             <p>testovaci zprava</p>
         </div>
-        
+
         <?php
             $this->controller->showView();
             ?>
+
+    <div class="zprava">
+        <?php foreach ($messages as $message) {
+            echo "<p>" . $message["text"] . "</p>";
+        }
+        ?>
+
+    </div>
+
 </body>
 
 </html>
